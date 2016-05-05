@@ -1,0 +1,25 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "expense",
+            "otherEntityName": "expense",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "expense_type"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160307094036",
+    "dto": "no",
+    "service": "serviceClass",
+    "pagination": "pager"
+}

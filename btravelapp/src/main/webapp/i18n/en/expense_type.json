@@ -1,0 +1,23 @@
+{
+    "btravelappApp": {
+        "expense_type" : {
+            "home": {
+                "title": "Expense Types",
+                "createLabel": "Create a new Expense Type",
+                "createOrEditLabel": "Create or edit a Expense Type",
+                "search": "Search for Expense Type"
+            },
+            "created": "A new Expense Type is created with identifier {{ param }}",
+            "updated": "A Expense Type is updated with identifier {{ param }}",
+            "deleted": "A Expense Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Expense Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Expense Type"
+            },
+            "type": "Type",
+            "expense": "Expense"
+        }
+    }
+}

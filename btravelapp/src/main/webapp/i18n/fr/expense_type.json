@@ -1,0 +1,24 @@
+{
+    "btravelappApp": {
+        "expense_type" : {
+            "home": {
+                "title": "Types de dépenses",
+                "createLabel": "Créer un nouveau Type de dépenses",
+                "createOrEditLabel": "Créer ou éditer un Type de dépenses",
+                "search": "Search for Type de dépenses"
+            },
+            "created": "Un nouveau Type de dépenses a été créé avec l'identifiant {{ param }}",
+            "updated": "Le type de dépenses avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le type de dépenses avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le type de dépenses {{ id }} ?"
+            },
+            "detail": {
+                "title": "Type de dépenses"
+            },
+            "type": "Type",
+            "expense": "Frais"
+        }
+    }
+}
+

@@ -1,0 +1,34 @@
+{
+    "btravelappApp": {
+        "historybtr" : {
+            "home": {
+                "title": "Historybtrs",
+                "createLabel": "Create a new Historybtr",
+                "createOrEditLabel": "Create or edit a Historybtr",
+                "search": "Search for Historybtr"
+            },
+            "created": "A new Historybtr is created with identifier {{ param }}",
+            "updated": "A Historybtr is updated with identifier {{ param }}",
+            "deleted": "A Historybtr is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Historybtr {{ id }}?"
+            },
+            "detail": {
+                "title": "Historybtr"
+            },
+            "btrstatusbefore": "Btrstatusbefore",
+            "btrstatusafter": "Btrstatusafter",
+            "change_date": "Change_date",
+            "changed_by": "Changed_by",
+            "start_date": "Start_date",
+            "end_date": "End_date",
+            "assigned_to": "Assigned_to",
+            "assigned_from": "Assigned_from",
+            "location": "Location",
+            "center_cost": "Center_cost",
+            "request_date": "Request_date",
+            "last_modified_date": "Last_modified_date",
+            "btr": "Btr"
+        }
+    }
+}

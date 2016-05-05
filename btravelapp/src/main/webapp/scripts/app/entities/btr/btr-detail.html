@@ -1,0 +1,118 @@
+
+<div>
+    <h2><span translate="btravelappApp.btr.detail.title">Btr</span> {{btr.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.status">Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static"><b>{{btr.status}}</b></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.start_date">Start_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{btr.start_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.end_date">End_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{btr.end_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.location">Location</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{btr.location}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.center_cost">Center_cost</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{btr.center_cost}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.request_date">Request_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{btr.request_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.last_modified_date">Last_modified_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{btr.last_modified_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.user">user</span>
+                </td>
+                <td>
+                    {{btr.user.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.assigned_to">assigned_to</span>
+                </td>
+                <td>
+                    {{btr.assigned_to.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.assigned_from">assigned_from</span>
+                </td>
+                <td>
+                    {{btr.assigned_from.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.manager">manager</span>
+                </td>
+                <td>
+                    {{btr.manager.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.btr.supplier">supplier</span>
+                </td>
+                <td>
+                    {{btr.supplier.login}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

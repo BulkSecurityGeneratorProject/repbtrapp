@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity Btr.
+    -->
+    <changeSet id="20160307093919" author="jhipster">
+        <createTable tableName="btr">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="start_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="end_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="location" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="center_cost" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="request_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="last_modified_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="user_id" type="bigint"/>
+            <column name="assigned_to_id" type="bigint"/>
+            <column name="assigned_from_id" type="bigint"/>
+            <column name="manager_id" type="bigint"/>
+            <column name="supplier_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="btr" columnName="start_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="btr" columnName="end_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="btr" columnName="request_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="btr" columnName="last_modified_date" columnDataType="datetime"/>
+
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="btr"
+                                 constraintName="fk_btr_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="assigned_to_id"
+                                 baseTableName="btr"
+                                 constraintName="fk_btr_assigned_to_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="assigned_from_id"
+                                 baseTableName="btr"
+                                 constraintName="fk_btr_assigned_from_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="manager_id"
+                                 baseTableName="btr"
+                                 constraintName="fk_btr_manager_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="supplier_id"
+                                 baseTableName="btr"
+                                 constraintName="fk_btr_supplier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

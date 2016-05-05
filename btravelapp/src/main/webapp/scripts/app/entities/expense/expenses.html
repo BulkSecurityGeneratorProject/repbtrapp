@@ -1,0 +1,85 @@
+<div>
+    <h2 translate="btravelappApp.expense.home.title">Expenses</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left" has-authority="ROLE_SUPPLIER">
+                <button class="btn btn-primary" ui-sref="expense.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+class="hidden-xs"                        translate="btravelappApp.expense.home.createLabel">Create new Expense
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'btravelappApp.expense.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expense_cost"><span translate="btravelappApp.expense.expense_cost">Expense_cost</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="btr.id"><span translate="btravelappApp.expense.btr">btr</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expense_type.type"><span translate="btravelappApp.expense.expense_type">expense_type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expense in expenses track by expense.id">
+                    <td><a ui-sref="expense.detail({id:expense.id})">{{expense.id}}</a></td>
+                    <td>{{expense.expense_cost}}</td>
+                    <td>
+                        <a ui-sref="btr.detail({id:expense.btr.id})">{{expense.btr.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="expense_type.detail({id:expense.expense_type.id})">{{expense.expense_type.type}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="expense.detail({id:expense.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="expense.edit({id:expense.id})"
+                                    class="btn btn-primary btn-sm"
+                                    ng-hide="expense.btr.status!='Initiated'">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="expense.delete({id:expense.id})"
+                                    class="btn btn-danger btn-sm"
+                                    ng-hide="expense.btr.status!='Initiated'">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager>
+</div>
+<!-- Bug! Solutie: sa ma trimita in pagina btrs.html onclick="window.history.back()" -->
+<button type="submit"
+		onclick="location.href='/#/btrs'"            
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Btrs
+</button>

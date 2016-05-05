@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "btravelapp",
+    "packageName": "com.btapp",
+    "packageFolder": "com/btapp",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "2693f45c1299be977e10cbbe25bf6c2205b72c0b",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}

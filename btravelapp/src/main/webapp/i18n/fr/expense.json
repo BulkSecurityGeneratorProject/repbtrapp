@@ -1,0 +1,25 @@
+{
+    "btravelappApp": {
+        "expense" : {
+            "home": {
+                "title": "Expenses",
+                "createLabel": "Créer un nouveau Expense",
+                "createOrEditLabel": "Créer ou éditer un Expense",
+                "search": "Rechercher des dépenses"
+            },
+            "created": "Un nouveau Frais a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Frais avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Frais avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Expense {{ id }} ?"
+            },
+            "detail": {
+                "title": "Expense"
+            },
+            "expense_cost": "Frais Coût",
+            "btr": "BTR",
+            "expense_type": "Type de dépense"
+        }
+    }
+}
+

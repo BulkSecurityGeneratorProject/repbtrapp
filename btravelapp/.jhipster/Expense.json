@@ -1,0 +1,32 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "btr",
+            "otherEntityName": "btr",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "expense_type",
+            "otherEntityName": "expense_type",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "type"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "expense_cost",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160307094613",
+    "dto": "no",
+    "service": "serviceClass",
+    "pagination": "pager"
+}

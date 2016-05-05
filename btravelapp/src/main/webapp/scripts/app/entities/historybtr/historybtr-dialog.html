@@ -1,0 +1,206 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myHistorybtrLabel" translate="btravelappApp.historybtr.home.createOrEditLabel">Create or edit a Historybtr</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="historybtr.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.btrstatusbefore" for="field_btrstatusbefore">Btrstatusbefore</label>
+            <input type="text" class="form-control" name="btrstatusbefore" id="field_btrstatusbefore"
+                    ng-model="historybtr.btrstatusbefore"
+                    required />
+            <div ng-show="editForm.btrstatusbefore.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.btrstatusbefore.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.btrstatusafter" for="field_btrstatusafter">Btrstatusafter</label>
+            <input type="text" class="form-control" name="btrstatusafter" id="field_btrstatusafter"
+                    ng-model="historybtr.btrstatusafter"
+                    required />
+            <div ng-show="editForm.btrstatusafter.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.btrstatusafter.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.change_date" for="field_change_date">Change_date</label>
+            <input id="field_change_date" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="historybtr.change_date" is-open="datePickerForChange_date.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForChange_dateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.change_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.change_date.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.change_date.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.changed_by" for="field_changed_by">Changed_by</label>
+            <input type="text" class="form-control" name="changed_by" id="field_changed_by"
+                    ng-model="historybtr.changed_by"
+                    required />
+            <div ng-show="editForm.changed_by.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.changed_by.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.start_date" for="field_start_date">Start_date</label>
+            <input id="field_start_date" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="historybtr.start_date" is-open="datePickerForStart_date.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForStart_dateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.start_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.start_date.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.start_date.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.end_date" for="field_end_date">End_date</label>
+            <input id="field_end_date" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="historybtr.end_date" is-open="datePickerForEnd_date.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForEnd_dateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.end_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.end_date.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.end_date.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.assigned_to" for="field_assigned_to">Assigned_to</label>
+            <input type="text" class="form-control" name="assigned_to" id="field_assigned_to"
+                    ng-model="historybtr.assigned_to"
+                    required />
+            <div ng-show="editForm.assigned_to.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.assigned_to.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.assigned_from" for="field_assigned_from">Assigned_from</label>
+            <input type="text" class="form-control" name="assigned_from" id="field_assigned_from"
+                    ng-model="historybtr.assigned_from"
+                    required />
+            <div ng-show="editForm.assigned_from.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.assigned_from.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.location" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="historybtr.location"
+                    required />
+            <div ng-show="editForm.location.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.location.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.center_cost" for="field_center_cost">Center_cost</label>
+            <input type="text" class="form-control" name="center_cost" id="field_center_cost"
+                    ng-model="historybtr.center_cost"
+                    required />
+            <div ng-show="editForm.center_cost.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.center_cost.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.request_date" for="field_request_date">Request_date</label>
+            <input id="field_request_date" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="historybtr.request_date" is-open="datePickerForRequest_date.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForRequest_dateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.request_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.request_date.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.request_date.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.historybtr.last_modified_date" for="field_last_modified_date">Last_modified_date</label>
+            <input id="field_last_modified_date" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="historybtr.last_modified_date" is-open="datePickerForLast_modified_date.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForLast_modified_dateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.last_modified_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.last_modified_date.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.last_modified_date.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="btravelappApp.historybtr.btr" for="field_btr">btr</label>
+            <select class="form-control" id="field_btr" name="btr" ng-model="historybtr.btr" ng-options="btr as btr.id for btr in btrs track by btr.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

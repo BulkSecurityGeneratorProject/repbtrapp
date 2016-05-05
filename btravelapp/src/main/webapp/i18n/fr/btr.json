@@ -1,0 +1,47 @@
+{
+    "btravelappApp": {
+        "btr" : {
+            "home": {
+                "title": "Les demandes de voyages d'affaires",
+                "createLabel": "Créer un nouveau Demande Voyage d'affaires",
+                "createOrEditLabel": "Créer ou éditer un Demande Voyage d'affaires",
+                "search": "Search for Demande Voyage d'affaires"
+            },
+            "created": "Un nouveau Demande Voyage d'affaires a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Demande Voyage d'affaires avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Demande Voyage d'affaires avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Demande Voyage d'affaires No.{{ id }} ?"
+            },
+            "close": {
+                "questionclose": "Êtes-vous sûr de vouloir fermer le Demande Voyage d'affaires No.{{ id }}?"
+            },
+            "finish": {
+                "questionfinish": "Êtes-vous sûr de vouloir terminer le Demande Voyage d'affaires No.{{ id }}?"
+            },
+             "reject": {
+                "questionreject": "Êtes-vous sûr de vouloir rejeter le Demande Voyage d'affaires No.{{ id }}?"
+            },
+             "rapprove": {
+                "questionapprove": "Êtes-vous sûr de vouloir approuver le Demande Voyage d'affaires No.{{ id }}?"
+            },
+            "detail": {
+                "title": "Demande Voyage d'affaires"
+            },
+            "status": "Demande Voyage d'affaires Statut",
+            "start_date": "Demande Voyage d'affaires Date de début",
+            "end_date": "Demande Voyage d'affaires Date de fin",
+            "location": "Emplacement",
+            "center_cost": "Coût Centre",
+            "request_date": "Demande Voyage d'affaires Date de la demande",
+            "last_modified_date": "Dernière Date de Modification",
+            "user": "Employé",
+            "expense": "Frais de la demande Voyage d'affaires",
+            "assigned_to": "Assigné à",
+            "assigned_from": "Assigné De",
+            "manager": "Gérante",
+            "supplier": "Fournisseur"
+        }
+    }
+}
+

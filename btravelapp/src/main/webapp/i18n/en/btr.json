@@ -1,0 +1,47 @@
+{
+    "btravelappApp": {
+        "btr" : {
+            "home": {
+                "title": "Business Travel Requests",
+                "createLabel": "Create a new Business Travel Request",
+                "createOrEditLabel": "Create or edit a Business Travel Request",
+                "search": "Search for Btr"
+            },
+            "created": "A new Business Travel Request is created with identifier {{ param }}",
+            "updated": "A Business Travel Request is updated with identifier {{ param }}",
+            "deleted": "A Business Travel Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Business Travel Request No.{{ id }}?"
+            },
+            "close": {
+                "questionclose": "Are you sure you want to close Business Travel Request No.{{ id }}?"
+            },
+            "finish": {
+                "questionfinish": "Are you sure you want to finish Business Travel Request No.{{ id }}?"
+            },
+            "reject": {
+                "questionreject": "Are you sure you want to reject Business Travel Request No.{{ id }}?"
+            },
+            "approve": {
+                "questionapprove": "Are you sure you want to approve Business Travel Request No.{{ id }}?"
+            },
+            "detail": {
+                "title": "Business Travel Request No.{{ id }}"
+            },
+            "status": "Business Travel Request Status",
+            "start_date": "Business Travel Request Start Date",
+            "end_date": "Business Travel Request End Date",
+            "location": "Location",
+            "center_cost": "Center Cost",
+            "request_date": "Business Travel Request's Request Date",
+            "last_modified_date": "Last Modified Date",
+            "user": "Employee",
+            "expense": "Business Travel Request's Expense",
+            "assigned_to": "Assigned To",
+            "assigned_from": "Assigned From",
+            "manager": "Manager",
+            "supplier": "Supplier",
+            "star":"*"
+        }
+    }
+}

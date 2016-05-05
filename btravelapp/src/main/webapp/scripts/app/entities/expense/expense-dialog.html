@@ -1,0 +1,56 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myExpenseLabel" translate="btravelappApp.expense.home.createOrEditLabel">Create or edit a Expense</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <!--  
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="expense.id" readonly />
+        </div>
+        -->
+        <div class="form-group">
+            <label class="control-label" translate="btravelappApp.expense.expense_cost" for="field_expense_cost">Expense_cost</label>
+            <input type="number" class="form-control" name="expense_cost" id="field_expense_cost"
+                    ng-model="expense.expense_cost"
+                    required />
+            <div ng-show="editForm.expense_cost.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.expense_cost.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.expense_cost.$error.number" translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="btravelappApp.expense.btr" for="field_btr">btr</label>
+            <select class="form-control" id="field_btr" name="btr" ng-model="expense.btr" ng-options="btr as btr.id for btr in btrs track by btr.id " >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="btravelappApp.expense.expense_type" for="field_expense_type">expense_type</label>
+            <select class="form-control" id="field_expense_type" name="expense_type" ng-model="expense.expense_type" ng-options="expense_type as expense_type.type for expense_type in expense_types track by expense_type.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

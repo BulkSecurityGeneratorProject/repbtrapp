@@ -1,0 +1,126 @@
+
+<div>
+    <h2><span translate="btravelappApp.historybtr.detail.title">Historybtr</span> {{historybtr.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.btrstatusbefore">Btrstatusbefore</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.btrstatusbefore}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.btrstatusafter">Btrstatusafter</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.btrstatusafter}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.change_date">Change_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.change_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.changed_by">Changed_by</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.changed_by}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.start_date">Start_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.start_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.end_date">End_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.end_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.assigned_to">Assigned_to</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.assigned_to}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.assigned_from">Assigned_from</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.assigned_from}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.location">Location</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.location}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.center_cost">Center_cost</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.center_cost}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.request_date">Request_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.request_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.last_modified_date">Last_modified_date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{historybtr.last_modified_date | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="btravelappApp.historybtr.btr">btr</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="btr.detail({id:historybtr.btr.id})">{{historybtr.btr.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
