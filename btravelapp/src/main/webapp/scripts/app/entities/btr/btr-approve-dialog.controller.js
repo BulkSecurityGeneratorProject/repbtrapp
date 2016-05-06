@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('btravelappApp')
-	.controller('BtrApproveController', function($scope, $uibModalInstance,$http, entity, Btr) {
+	.controller('BtrApproveController', function($scope, $uibModalInstance,$http, entity, Btr, manager) {
 
 		$scope.user = entity;
         $scope.btr = entity;
@@ -38,62 +38,61 @@ angular.module('btravelappApp')
         	
         	if( $scope.btr.assigned_to.idManager != null )
 	        	{
-        		//if there is a manager n+2 then retrieve the login based on the idManager
-	        		//$scope.btr.status="Waiting for approval";
-        			//$scope.btr.assigned_to.login = $scope.btr.manager.idManager;
-        			//$scope.btr.assigned_to.login = $scope.btr.assigned_to.idManager;
-        			//var manager = $scope.btr.assigned_to.idManager;
         			
         		// TREBUIE SA VAD CUM MODIFIC ASSIGNED_TO DIN MANAGER IN MANAGER2 
         			//(adik din manager in manager2 <<manager-ul lui manager>>)
         		
-        		/*
-        			var result = function(id){
-        				return $http.get('api/users/user/'+id).then(function(result){
-        					 console.log($scope.btr.assigned_to.login);
-        					 $cope.btr.assigned_to.login = $scope.btr.assigned_to.idManager ;
-        					 console.log($scope.btr.assigned_to.login);
-        				}).then(function(response){
-        						console.log(response.data);
-        					 return response.data;
-        				})
-				
-        		 var result = function(id) {
-                     return $http.get('api/users/user/'+id).then(function(response) {
-                    	 console.log(response.data);
-                         return response.data;
-                     })
-                 }
-        				
-        		 var result = function (result) {
-        			 	$scope.btr.assigned_to = function(id) {
-        		             return $http.get('api/users/user/'+id).then(function(response) {
-        		            	 console.log(response.data);
-        		                 return response.data;
-        		             })
-        		         }
-        	        };*/
         	
-        	/* o alta incercare	
+        	/*
         		var managermic = function(id){
         			return $http.get('api/users/user/'+id).then(function(response){
         				console.log(response.data);
         				return response.data;})
         		}
         		console.log(response.data);
-        		
-        		var managermare = function(id){
-        			return $http.get('api/users/user/'+managermic(id)).then(function(responsem){
-        				console.log(responsem.data);
-        				return responsem.data;
+        		*/
+        		/* o alta incercare	
+        		var managermare = function(){			
+        			return $http.get('/users/'+$scope.btr.assigned_to.idManager).then(function(response){
+        				debugger;
+        				console.log(idManager);
+        				$scope.btr.assigned_to=response.data;
+        				console.log(response.data); // tot obiectul manager2
+        				return response.data;
         			})
         		}
-        		console.log(responsem.data);
-        		*/ 
+        			*/
+        		/* asta sa o mut in exterior ( acum incerc in btrapprove.service.js )
+        		$http.get('api/users/'+$scope.btr.assigned_to.idManager).then(function(response){
+        				debugger;
+        				$scope.btr.assigned_to=response.data;
+        				console.log(response.data); // tot obiectul manager2
+        				return response.data;
+        			});
+        			*/
+        	
+
+        		 
 	        		$scope.btr.assigned_from = $scope.btr.manager;
-	        		//$scope.btr.assigned_to = managermare($scope.btr.assigned_to.id);
-	        		$scope.btr.assigned_to = $scope.btr.manager.user;
-	        	}
+	        		
+	        		debugger;
+	        		$scope.btr.assigned_to = manager;
+
+	        		console.log($scope); 
+	        		console.log($scope.btr.assigned_to); 
+	        		debugger;
+	        		
+	        		
+	        		/* dintr-o bucata
+	        		var idManager = $scope.btr.assigned_to.idManager;
+	        		$scope.btr.assigned_to = function(idManager){			
+	        			return $http.get('api/users/'+idManager).then(function(response){
+	        				console.log(response.data); // tot obiectul manager2
+	        				return response.data;
+	        			})
+	        		};
+	        		*/
+	        	}    
         	else
         		{
         			$scope.btr.status="Issuing ticket";//get the object instead of login
@@ -106,7 +105,7 @@ angular.module('btravelappApp')
         	
         	
         	console.log($scope.btr.assigned_from); // manager
-        	console.log($scope.btr.assigned_to); //manager2 
+        	console.log($scope.btr.assigned_to); 
         	
         
         	

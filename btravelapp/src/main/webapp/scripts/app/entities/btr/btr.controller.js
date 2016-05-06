@@ -49,20 +49,13 @@ angular.module('btravelappApp')
             
         };
       
-        
-        /* PRIMA INCERCARE PENTRU cancel,approve si reject; MERG toate DAR NU MODIFICA SI IN SPATE
-        $scope.cancel = function () {  
-        	//$scope.users.push({'status':$scope.btr.status});
-        	$scope.btr.status = "Closed";
-        	//$scope.$save();
-        	//$scope.btr.status.update();
-        };
-        
-        $scope.approve = function () {
-        	$scope.btr.status = "Issuing ticket";
-        };
-        $scope.reject = function () {
-        	$scope.btr.status = "Initiated";
-        };
+   
+        /* INCERCARE RETARDATA 
+         * $http.get('api/users/'+$scope.btr.assigned_to.idManager).then(function(response){
+				debugger;
+				$scope.btr.assigned_to=response.data;
+				console.log(response.data); // tot obiectul manager2
+				return response.data;
+			});
         */
     });

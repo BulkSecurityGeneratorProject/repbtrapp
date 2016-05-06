@@ -1,6 +1,7 @@
 package com.btapp.repository;
 
 import com.btapp.domain.Authority;
+import com.btapp.domain.Btr;
 import com.btapp.domain.User;
 
 import java.time.ZonedDateTime;
@@ -29,6 +30,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     Optional<User> findAllByAuthorities(Authority authority);  // adaugat 11.03.2016
 
+    
+    
     @Override
     void delete(User t);
 

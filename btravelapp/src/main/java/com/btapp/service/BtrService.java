@@ -212,4 +212,6 @@ public class BtrService {
             .stream(btrSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+    
+    
 }
