@@ -29,13 +29,11 @@ public interface BtrRepository extends JpaRepository<Btr,Long> {
     @Query("select btr from Btr btr where btr.supplier.login = ?#{principal.username}")
     List<Btr> findBySupplierIsCurrentUser();
     
-    //@Query("select btr from Btr btr where btr.assigned_from.id = ?#{principal.id} or"
-   // 		+ " btr.user.id = ?#{principal.id}")
-   // Page<Btr> finByAssigned_toOrEmployeeIsCurrentUser(Pageable pageable);
-
     @Query("select btr from Btr btr where btr.assigned_to.login = ?#{principal.username} or"
     		+ " btr.user.login = ?#{principal.username}"
     		+ " or btr.assigned_from.login = ?#{principal.username}")
     Page<Btr> finByAssigned_toOrEmployeeIsCurrentUser(Pageable pageable);
 
+    //@Query("select user from Btr btr join User user where btr.assigned_to.idManager = user.login")
+    //Page<Btr> finByIdManager(Pageable pageable);
 }
