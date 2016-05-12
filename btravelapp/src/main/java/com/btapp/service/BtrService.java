@@ -203,8 +203,6 @@ public class BtrService {
     public Page<Btr> findAll(Pageable pageable) {
         log.debug("Request to get all Btrs");
         Page<Btr> result = btrRepository.finByAssigned_toOrEmployeeIsCurrentUser(pageable); 
-        //if(result == null)
-        //	System.out.println("No task's.");
         return result;
     }
 

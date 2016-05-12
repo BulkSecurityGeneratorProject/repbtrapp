@@ -59,7 +59,7 @@ public class ExpenseService {
     @Transactional(readOnly = true) 
     public Page<Expense> findAll(Pageable pageable) {
         log.debug("Request to get all Expenses");
-        Page<Expense> result = expenseRepository.findAll(pageable); 
+        Page<Expense> result = expenseRepository.finByBtrExpenssesIsCurrentUser(pageable); //findAll
         return result;
     }
     

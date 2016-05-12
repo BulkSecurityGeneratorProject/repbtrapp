@@ -29,7 +29,8 @@ class="hidden-xs"                        translate="btravelappApp.comments.home.
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="commentss.length!=0">
+                <p ng-hide="commentss.length!=0" translate="btravelappApp.comments.home.norow"></p>
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="comment"><span translate="btravelappApp.comments.comment">Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="btr.id"><span translate="btravelappApp.comments.btr">btr</span> <span class="glyphicon glyphicon-sort"></span></th>

@@ -31,7 +31,8 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="historybtrs.length!=0">
+                <p ng-hide="historybtrs.length!=0" translate="btravelappApp.historybtr.home.norow"></p>
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="btrstatusbefore"><span translate="btravelappApp.historybtr.btrstatusbefore">Btrstatusbefore</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="btrstatusafter"><span translate="btravelappApp.historybtr.btrstatusafter">Btrstatusafter</span> <span class="glyphicon glyphicon-sort"></span></th>

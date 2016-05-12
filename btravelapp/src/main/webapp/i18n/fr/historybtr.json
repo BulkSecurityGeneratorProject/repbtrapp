@@ -5,7 +5,8 @@
                 "title": "Historybtrs",
                 "createLabel": "Créer un nouveau Historybtr",
                 "createOrEditLabel": "Créer ou éditer un Historybtr",
-                "search": "Search for Historybtr"
+                "search": "Search for Historybtr",
+                "norow": "Il n'y a pas d'histoire de btr pour vous."
             },
             "created": "Un nouveau Historybtr a été créé avec l'identifiant {{ param }}",
             "updated": "Le Historybtr avec l'identifiant {{ param }} a été mis à jour",

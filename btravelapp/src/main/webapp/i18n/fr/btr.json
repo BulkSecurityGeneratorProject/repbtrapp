@@ -5,7 +5,8 @@
                 "title": "Les demandes de voyages d'affaires",
                 "createLabel": "Créer un nouveau Demande Voyage d'affaires",
                 "createOrEditLabel": "Créer ou éditer un Demande Voyage d'affaires",
-                "search": "Search for Demande Voyage d'affaires"
+                "search": "Search for Demande Voyage d'affaires",
+                "norow": "Il n'y a pas de demande pour vous maintenant."
             },
             "created": "Un nouveau Demande Voyage d'affaires a été créé avec l'identifiant {{ param }}",
             "updated": "Le Demande Voyage d'affaires avec l'identifiant {{ param }} a été mis à jour",

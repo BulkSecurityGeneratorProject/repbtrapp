@@ -29,7 +29,8 @@ class="hidden-xs"                        translate="btravelappApp.expense_type.h
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="expense_types.length!=0">
+                <p ng-hide="expense_types.length!=0" translate="btravelappApp.expense_type.home.norow"></p>
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="type"><span translate="btravelappApp.expense_type.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>

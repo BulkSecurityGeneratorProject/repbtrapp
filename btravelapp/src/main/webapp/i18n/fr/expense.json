@@ -5,7 +5,8 @@
                 "title": "Expenses",
                 "createLabel": "Créer un nouveau Expense",
                 "createOrEditLabel": "Créer ou éditer un Expense",
-                "search": "Rechercher des dépenses"
+                "search": "Rechercher des dépenses",
+                "norow": "Il n'y a pas de frais pour vous maintenant."
             },
             "created": "Un nouveau Frais a été créé avec l'identifiant {{ param }}",
             "updated": "Le Frais avec l'identifiant {{ param }} a été mis à jour",

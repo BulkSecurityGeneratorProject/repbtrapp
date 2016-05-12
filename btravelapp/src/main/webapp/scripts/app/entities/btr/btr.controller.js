@@ -11,7 +11,7 @@ angular.module('btravelappApp')
         $scope.reverse = true;
         $scope.page = 1;
         $scope.loadAll = function() {
-            Btr.query({page: $scope.page - 1, size: 5, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Btr.query({page: $scope.page - 1, size: 25, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.totalItems = headers('X-Total-Count');
                 $scope.btrs = result;

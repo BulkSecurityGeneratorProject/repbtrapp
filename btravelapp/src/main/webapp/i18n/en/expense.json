@@ -5,7 +5,8 @@
                 "title": "Expenses",
                 "createLabel": "Create a new Expense",
                 "createOrEditLabel": "Create or edit a Expense",
-                "search": "Search for Expense"
+                "search": "Search for Expense",
+                "norow": "There is no expensses for you now."
             },
             "created": "A new Expense is created with identifier {{ param }}",
             "updated": "A Expense is updated with identifier {{ param }}",

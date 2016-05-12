@@ -5,7 +5,8 @@
                 "title": "Types de dépenses",
                 "createLabel": "Créer un nouveau Type de dépenses",
                 "createOrEditLabel": "Créer ou éditer un Type de dépenses",
-                "search": "Search for Type de dépenses"
+                "search": "Search for Type de dépenses",
+                "norow": "Il n'y a pas de type de dépense pour vous maintenant."
             },
             "created": "Un nouveau Type de dépenses a été créé avec l'identifiant {{ param }}",
             "updated": "Le type de dépenses avec l'identifiant {{ param }} a été mis à jour",

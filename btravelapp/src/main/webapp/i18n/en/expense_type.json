@@ -5,7 +5,8 @@
                 "title": "Expense Types",
                 "createLabel": "Create a new Expense Type",
                 "createOrEditLabel": "Create or edit a Expense Type",
-                "search": "Search for Expense Type"
+                "search": "Search for Expense Type",
+                "norow": "There is no expensse type for you now."
             },
             "created": "A new Expense Type is created with identifier {{ param }}",
             "updated": "A Expense Type is updated with identifier {{ param }}",
