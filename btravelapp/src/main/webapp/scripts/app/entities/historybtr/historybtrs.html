@@ -3,6 +3,7 @@
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
+           <!--  No new historybtr
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="historybtr.new" >
                     <span class="glyphicon glyphicon-plus"></span>
@@ -11,6 +12,7 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
                     </span>
                 </button>
             </div>
+            -->
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
@@ -35,6 +37,7 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
                     <th jh-sort-by="btrstatusafter"><span translate="btravelappApp.historybtr.btrstatusafter">Btrstatusafter</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="change_date"><span translate="btravelappApp.historybtr.change_date">Change_date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="changed_by"><span translate="btravelappApp.historybtr.changed_by">Changed_by</span> <span class="glyphicon glyphicon-sort"></span></th>
+                   <!-- restul, la vizualizare 
                     <th jh-sort-by="start_date"><span translate="btravelappApp.historybtr.start_date">Start_date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="end_date"><span translate="btravelappApp.historybtr.end_date">End_date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="assigned_to"><span translate="btravelappApp.historybtr.assigned_to">Assigned_to</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -43,7 +46,9 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
                     <th jh-sort-by="center_cost"><span translate="btravelappApp.historybtr.center_cost">Center_cost</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="request_date"><span translate="btravelappApp.historybtr.request_date">Request_date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="last_modified_date"><span translate="btravelappApp.historybtr.last_modified_date">Last_modified_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                   -->
                     <th jh-sort-by="btr.id"><span translate="btravelappApp.historybtr.btr">btr</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="suma_totala"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -54,6 +59,7 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
                     <td>{{historybtr.btrstatusafter}}</td>
                     <td>{{historybtr.change_date | date:'medium'}}</td>
                     <td>{{historybtr.changed_by}}</td>
+                    <!-- restul, la vizualizare 
                     <td>{{historybtr.start_date | date:'medium'}}</td>
                     <td>{{historybtr.end_date | date:'medium'}}</td>
                     <td>{{historybtr.assigned_to}}</td>
@@ -62,9 +68,11 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
                     <td>{{historybtr.center_cost}}</td>
                     <td>{{historybtr.request_date | date:'medium'}}</td>
                     <td>{{historybtr.last_modified_date | date:'medium'}}</td>
+                    -->
                     <td>
                         <a ui-sref="btr.detail({id:historybtr.btr.id})">{{historybtr.btr.id}}</a>
                     </td>
+                    <td>{{btr.suma_totala}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -73,20 +81,25 @@ class="hidden-xs"                        translate="btravelappApp.historybtr.hom
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
+                            <!--  restul, la vizualizare 
                             <button type="submit"
                                     ui-sref="historybtr.edit({id:historybtr.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
+                            -->
                             <button type="submit"
                                     ui-sref="historybtr.delete({id:historybtr.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    class="btn btn-danger btn-sm"
+                                    has-authority="ROLE_ADMIN">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>
+                            
                         </div>
                     </td>
+                   
                 </tr>
             </tbody>
         </table>

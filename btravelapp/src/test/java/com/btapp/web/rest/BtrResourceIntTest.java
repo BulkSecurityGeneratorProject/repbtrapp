@@ -1,47 +1,39 @@
 package com.btapp.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import com.btapp.Application;
+import com.btapp.domain.Btr;
+import com.btapp.repository.BtrRepository;
+import com.btapp.service.BtrService;
+import com.btapp.repository.search.BtrSearchRepository;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import com.btapp.web.rest.TestUtil;
-import com.btapp.Application;
-import com.btapp.domain.Btr;
-import com.btapp.repository.BtrRepository;
-import com.btapp.service.BtrService;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 /**
@@ -55,7 +47,7 @@ import com.btapp.service.BtrService;
 @IntegrationTest
 public class BtrResourceIntTest {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.of("Z"));
 
     private static final String DEFAULT_STATUS = "AAAAA";
     private static final String UPDATED_STATUS = "BBBBB";
@@ -80,11 +72,17 @@ public class BtrResourceIntTest {
     private static final ZonedDateTime UPDATED_LAST_MODIFIED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_LAST_MODIFIED_DATE_STR = dateTimeFormatter.format(DEFAULT_LAST_MODIFIED_DATE);
 
+    private static final Double DEFAULT_SUMA_TOTALA = 1D;
+    private static final Double UPDATED_SUMA_TOTALA = 2D;
+
     @Inject
     private BtrRepository btrRepository;
 
     @Inject
     private BtrService btrService;
+
+    @Inject
+    private BtrSearchRepository btrSearchRepository;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -108,6 +106,7 @@ public class BtrResourceIntTest {
 
     @Before
     public void initTest() {
+        btrSearchRepository.deleteAll();
         btr = new Btr();
         btr.setStatus(DEFAULT_STATUS);
         btr.setStart_date(DEFAULT_START_DATE);
@@ -116,6 +115,7 @@ public class BtrResourceIntTest {
         btr.setCenter_cost(DEFAULT_CENTER_COST);
         btr.setRequest_date(DEFAULT_REQUEST_DATE);
         btr.setLast_modified_date(DEFAULT_LAST_MODIFIED_DATE);
+        btr.setSuma_totala(DEFAULT_SUMA_TOTALA);
     }
 
     @Test
@@ -141,6 +141,11 @@ public class BtrResourceIntTest {
         assertThat(testBtr.getCenter_cost()).isEqualTo(DEFAULT_CENTER_COST);
         assertThat(testBtr.getRequest_date()).isEqualTo(DEFAULT_REQUEST_DATE);
         assertThat(testBtr.getLast_modified_date()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testBtr.getSuma_totala()).isEqualTo(DEFAULT_SUMA_TOTALA);
+
+        // Validate the Btr in ElasticSearch
+        Btr btrEs = btrSearchRepository.findOne(testBtr.getId());
+        assertThat(btrEs).isEqualToComparingFieldByField(testBtr);
     }
 
     @Test
@@ -271,6 +276,24 @@ public class BtrResourceIntTest {
 
     @Test
     @Transactional
+    public void checkSuma_totalaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = btrRepository.findAll().size();
+        // set the field null
+        btr.setSuma_totala(null);
+
+        // Create the Btr, which fails.
+
+        restBtrMockMvc.perform(post("/api/btrs")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(btr)))
+                .andExpect(status().isBadRequest());
+
+        List<Btr> btrs = btrRepository.findAll();
+        assertThat(btrs).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllBtrs() throws Exception {
         // Initialize the database
         btrRepository.saveAndFlush(btr);
@@ -286,7 +309,8 @@ public class BtrResourceIntTest {
                 .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
                 .andExpect(jsonPath("$.[*].center_cost").value(hasItem(DEFAULT_CENTER_COST.toString())))
                 .andExpect(jsonPath("$.[*].request_date").value(hasItem(DEFAULT_REQUEST_DATE_STR)))
-                .andExpect(jsonPath("$.[*].last_modified_date").value(hasItem(DEFAULT_LAST_MODIFIED_DATE_STR)));
+                .andExpect(jsonPath("$.[*].last_modified_date").value(hasItem(DEFAULT_LAST_MODIFIED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].suma_totala").value(hasItem(DEFAULT_SUMA_TOTALA.doubleValue())));
     }
 
     @Test
@@ -306,7 +330,8 @@ public class BtrResourceIntTest {
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
             .andExpect(jsonPath("$.center_cost").value(DEFAULT_CENTER_COST.toString()))
             .andExpect(jsonPath("$.request_date").value(DEFAULT_REQUEST_DATE_STR))
-            .andExpect(jsonPath("$.last_modified_date").value(DEFAULT_LAST_MODIFIED_DATE_STR));
+            .andExpect(jsonPath("$.last_modified_date").value(DEFAULT_LAST_MODIFIED_DATE_STR))
+            .andExpect(jsonPath("$.suma_totala").value(DEFAULT_SUMA_TOTALA.doubleValue()));
     }
 
     @Test
@@ -321,22 +346,25 @@ public class BtrResourceIntTest {
     @Transactional
     public void updateBtr() throws Exception {
         // Initialize the database
-        btrRepository.saveAndFlush(btr);
+        btrService.save(btr);
 
-		int databaseSizeBeforeUpdate = btrRepository.findAll().size();
+        int databaseSizeBeforeUpdate = btrRepository.findAll().size();
 
         // Update the btr
-        btr.setStatus(UPDATED_STATUS);
-        btr.setStart_date(UPDATED_START_DATE);
-        btr.setEnd_date(UPDATED_END_DATE);
-        btr.setLocation(UPDATED_LOCATION);
-        btr.setCenter_cost(UPDATED_CENTER_COST);
-        btr.setRequest_date(UPDATED_REQUEST_DATE);
-        btr.setLast_modified_date(UPDATED_LAST_MODIFIED_DATE);
+        Btr updatedBtr = new Btr();
+        updatedBtr.setId(btr.getId());
+        updatedBtr.setStatus(UPDATED_STATUS);
+        updatedBtr.setStart_date(UPDATED_START_DATE);
+        updatedBtr.setEnd_date(UPDATED_END_DATE);
+        updatedBtr.setLocation(UPDATED_LOCATION);
+        updatedBtr.setCenter_cost(UPDATED_CENTER_COST);
+        updatedBtr.setRequest_date(UPDATED_REQUEST_DATE);
+        updatedBtr.setLast_modified_date(UPDATED_LAST_MODIFIED_DATE);
+        updatedBtr.setSuma_totala(UPDATED_SUMA_TOTALA);
 
         restBtrMockMvc.perform(put("/api/btrs")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(btr)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedBtr)))
                 .andExpect(status().isOk());
 
         // Validate the Btr in the database
@@ -350,23 +378,53 @@ public class BtrResourceIntTest {
         assertThat(testBtr.getCenter_cost()).isEqualTo(UPDATED_CENTER_COST);
         assertThat(testBtr.getRequest_date()).isEqualTo(UPDATED_REQUEST_DATE);
         assertThat(testBtr.getLast_modified_date()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testBtr.getSuma_totala()).isEqualTo(UPDATED_SUMA_TOTALA);
+
+        // Validate the Btr in ElasticSearch
+        Btr btrEs = btrSearchRepository.findOne(testBtr.getId());
+        assertThat(btrEs).isEqualToComparingFieldByField(testBtr);
     }
 
     @Test
     @Transactional
     public void deleteBtr() throws Exception {
         // Initialize the database
-        btrRepository.saveAndFlush(btr);
+        btrService.save(btr);
 
-		int databaseSizeBeforeDelete = btrRepository.findAll().size();
+        int databaseSizeBeforeDelete = btrRepository.findAll().size();
 
         // Get the btr
         restBtrMockMvc.perform(delete("/api/btrs/{id}", btr.getId())
                 .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 
+        // Validate ElasticSearch is empty
+        boolean btrExistsInEs = btrSearchRepository.exists(btr.getId());
+        assertThat(btrExistsInEs).isFalse();
+
         // Validate the database is empty
         List<Btr> btrs = btrRepository.findAll();
         assertThat(btrs).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void searchBtr() throws Exception {
+        // Initialize the database
+        btrService.save(btr);
+
+        // Search the btr
+        restBtrMockMvc.perform(get("/api/_search/btrs?query=id:" + btr.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(btr.getId().intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].start_date").value(hasItem(DEFAULT_START_DATE_STR)))
+            .andExpect(jsonPath("$.[*].end_date").value(hasItem(DEFAULT_END_DATE_STR)))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].center_cost").value(hasItem(DEFAULT_CENTER_COST.toString())))
+            .andExpect(jsonPath("$.[*].request_date").value(hasItem(DEFAULT_REQUEST_DATE_STR)))
+            .andExpect(jsonPath("$.[*].last_modified_date").value(hasItem(DEFAULT_LAST_MODIFIED_DATE_STR)))
+            .andExpect(jsonPath("$.[*].suma_totala").value(hasItem(DEFAULT_SUMA_TOTALA.doubleValue())));
     }
 }

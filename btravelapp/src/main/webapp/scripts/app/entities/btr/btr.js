@@ -69,6 +69,7 @@ angular.module('btravelappApp')
                                     center_cost: null,
                                     request_date: null,
                                     last_modified_date: null,
+                                    suma_totala: null,
                                     id: null
                                 };
                             }

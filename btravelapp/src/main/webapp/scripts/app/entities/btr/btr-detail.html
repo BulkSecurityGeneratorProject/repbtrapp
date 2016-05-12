@@ -66,6 +66,16 @@
                     <span class="form-control-static">{{btr.last_modified_date | date:'medium'}}</span>
                 </td>
             </tr>
+            <!-- added suma_totala field -->
+            <tr>
+            	<td>
+            		<span translate="btravelappApp.btr.suma_totala">Suma Totala</span>
+        		</td>
+        		<td>
+            		<span class="form-control-static">{{btr.suma_totala}}</span>
+        		</td>
+            </tr>
+            
             <tr>
                 <td>
                     <span translate="btravelappApp.btr.user">user</span>
@@ -109,7 +119,33 @@
             </tbody>
         </table>
     </div>
-
+    
+    
+	<h2>Expensses for Business Travel Request No. {{btr.id}}</h2>
+	<div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expense_cost"><span translate="btravelappApp.expense.expense_cost">Expense_cost</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="btr.id"><span translate="btravelappApp.expense.btr">btr</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expense_type.type"><span translate="btravelappApp.expense.expense_type">expense_type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expense in expenses track by expense.btr.id">
+                    <td>
+                    	<a ui-sref="expense.detail({id:expense.id})">{{expense.id}}</a>
+                    </td>
+                    <td>{{expense.expense_cost}}</td>
+                    <td>
+                        <a ui-sref="expense_type.detail({id:expense.expense_type.id})">{{expense.expense_type.type}}</a>
+                    </td>          
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">

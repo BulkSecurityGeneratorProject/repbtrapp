@@ -99,6 +99,14 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+        	"fieldId": 8,
+            "fieldName": "suma_totala",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160307093919",

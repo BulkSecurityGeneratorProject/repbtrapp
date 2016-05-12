@@ -1,0 +1,78 @@
+
+<div>
+    <h2><span translate="btravelappApp.btr.detail.title">Btr</span> {{vm.btr.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="btravelappApp.btr.status">Status</span></dt>
+        <dd>
+            <span>{{vm.btr.status}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.start_date">Start Date</span></dt>
+        <dd>
+            <span>{{vm.btr.start_date | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.end_date">End Date</span></dt>
+        <dd>
+            <span>{{vm.btr.end_date | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.location">Location</span></dt>
+        <dd>
+            <span>{{vm.btr.location}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.center_cost">Center Cost</span></dt>
+        <dd>
+            <span>{{vm.btr.center_cost}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.request_date">Request Date</span></dt>
+        <dd>
+            <span>{{vm.btr.request_date | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.last_modified_date">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.btr.last_modified_date | date:'medium'}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.suma_totala">Suma Totala</span></dt>
+        <dd>
+            <span>{{vm.btr.suma_totala}}</span>
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.user">User</span></dt>
+        <dd>
+            {{vm.btr.user.login}}
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.assigned_to">Assigned To</span></dt>
+        <dd>
+            {{vm.btr.assigned_to.login}}
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.assigned_from">Assigned From</span></dt>
+        <dd>
+            {{vm.btr.assigned_from.login}}
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.manager">Manager</span></dt>
+        <dd>
+            {{vm.btr.manager.login}}
+        </dd>
+        <hr>
+        <dt><span translate="btravelappApp.btr.supplier">Supplier</span></dt>
+        <dd>
+            {{vm.btr.supplier.login}}
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

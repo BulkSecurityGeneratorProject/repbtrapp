@@ -1,6 +1,7 @@
 package com.btapp.service;
 
 import com.btapp.domain.Btr;
+import com.btapp.domain.Historybtr;
 import com.btapp.domain.User;
 import com.btapp.repository.BtrRepository;
 import com.btapp.repository.UserRepository;
@@ -39,6 +40,9 @@ public class BtrService {
     @Inject
     private BtrSearchRepository btrSearchRepository;
     
+    //@Inject
+   // private Historybtr historybtr;
+    
     /**
      * Save a btr.
      * @return the persisted entity
@@ -49,12 +53,18 @@ public class BtrService {
         btr.getUser();
         Optional<User> user = userRepository.findOneByLogin(User.getCurrentUser());
         
-        if(btr.getStatus() == null)
-        	btr.setStatus("Initiated");    
+        if(btr.getStatus() == null){
+        	btr.setStatus("Initiated"); 
+        	// history line added;
+        	//historybtr.setBtrstatusbefore("N/A");
+        	//historybtr.setBtrstatusafter("Initiated");
+        }
         else
-	        if(btr.getStatus() == "Initiated")
+	        if(btr.getStatus() == "Initiated"){
 	        	btr.setStatus("Waiting for approval");
-        
+        		//historybtr.setBtrstatusbefore("Initiated");
+        		//historybtr.setBtrstatusafter("Waiting for approval");
+	        }
         if(btr.getId() == null)
         {
 	        btr.setAssigned_from((User)user.get());
@@ -63,6 +73,22 @@ public class BtrService {
 	        btr.setManager((User)user.get());
 	        btr.setRequest_date(ZonedDateTime.now());
 	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
+	        btr.setSuma_totala(null);
+	        
+	        /*history line added
+	        historybtr.setAssigned_from(btr.getAssigned_from().getLogin());
+	        historybtr.setAssigned_to(btr.getAssigned_to().getLogin());
+	        historybtr.setBtr(btr);
+	        historybtr.setBtrstatusafter("N/A");
+	        historybtr.setBtrstatusbefore("Initiated");
+	        historybtr.setCenter_cost(btr.getCenter_cost());
+	        historybtr.setChange_date(btr.getLast_modified_date());
+	        historybtr.setChanged_by(btr.getAssigned_from().getLogin());
+	        historybtr.setEnd_date(btr.getEnd_date());
+	        historybtr.setLast_modified_date(btr.getLast_modified_date());
+	        historybtr.setLocation(btr.getLocation());
+	        historybtr.setRequest_date(btr.getRequest_date());
+	        historybtr.setStart_date(btr.getStart_date());*/
         }
         else
         {
@@ -177,6 +203,8 @@ public class BtrService {
     public Page<Btr> findAll(Pageable pageable) {
         log.debug("Request to get all Btrs");
         Page<Btr> result = btrRepository.finByAssigned_toOrEmployeeIsCurrentUser(pageable); 
+        //if(result == null)
+        //	System.out.println("No task's.");
         return result;
     }
 

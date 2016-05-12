@@ -35,11 +35,12 @@
             "center_cost": "Coût Centre",
             "request_date": "Demande Voyage d'affaires Date de la demande",
             "last_modified_date": "Dernière Date de Modification",
+            "suma_totala": "Le montant total",
             "user": "Employé",
             "expense": "Frais de la demande Voyage d'affaires",
             "assigned_to": "Assigné à",
             "assigned_from": "Assigné De",
-            "manager": "Gérante",
+            "manager": "Créé par",
             "supplier": "Fournisseur"
         }
     }

@@ -35,11 +35,12 @@
             "center_cost": "Center Cost",
             "request_date": "Business Travel Request's Request Date",
             "last_modified_date": "Last Modified Date",
+            "suma_totala": "Total amount",
             "user": "Employee",
             "expense": "Business Travel Request's Expense",
             "assigned_to": "Assigned To",
             "assigned_from": "Assigned From",
-            "manager": "Manager",
+            "manager": "Created by",
             "supplier": "Supplier",
             "star":"*"
         }

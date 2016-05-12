@@ -1,17 +1,26 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks) {
+    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense) {
 
+    	//added expense
+    	$scope.expenses = [];
+    	
         $scope.btrs = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 1;
         $scope.loadAll = function() {
-            Btr.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Btr.query({page: $scope.page - 1, size: 5, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.totalItems = headers('X-Total-Count');
                 $scope.btrs = result;
+            });
+            //added expense
+            Expense.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
+                $scope.expenses = result;
             });
         };
         $scope.loadPage = function(page) {
@@ -46,6 +55,11 @@ angular.module('btravelappApp')
                 last_modified_date: null,
                 id: null
             };
+            // added expense
+            $scope.expense = {
+                    id: null,
+                    expense_cost: null
+                };
             
         };
       

@@ -47,10 +47,17 @@
             </tbody>
             -->
             <tbody>
+            <!--  
             	<tr ng-repeat="expense in expenses track by expense.id">
             		<td><span class="form-control-static">{{expense.expense_cost}}</span></td>
             		<td><a class="form-control-static" ui-sref="btr.detail({id:expense.btr.id})">{{expense.btr.id}}</a></td>
             		<td><a class="form-control-static" ui-sref="expense_type.detail({id:expense.expense_type.id})">{{expense.expense_type.type}}</a></td>
+            	</tr>
+            -->	
+            	<tr ng-repeat="expense in expenses track by expense.id">
+            		<td><span class="form-control-static">{{expense.expense_cost}}</span></td>
+            		<td><a class="form-control-static">{{expense.btr.id}}</a></td>
+            		<td><a class="form-control-static">{{expense.expense_type.type}}</a></td>
             	</tr>
             </tbody>
         </table>

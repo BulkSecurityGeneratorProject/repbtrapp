@@ -70,6 +70,9 @@
             </column>
             
             <column name="btr_id" type="bigint"/>
+            <column name = "suma_totala" type="double">
+            	<constraints nullable="false" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="historybtr" columnName="change_date" columnDataType="datetime"/>

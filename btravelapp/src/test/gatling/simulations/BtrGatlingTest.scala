@@ -42,7 +42,7 @@ class BtrGatlingTest extends Simulation {
         .get("/api/account")
         .headers(headers_http)
         .check(status.is(401))
-        .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
+        .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token"))).exitHereIfFailed
         .pause(10)
         .exec(http("Authentication")
         .post("/api/authentication")
@@ -50,7 +50,7 @@ class BtrGatlingTest extends Simulation {
         .formParam("j_username", "admin")
         .formParam("j_password", "admin")
         .formParam("remember-me", "true")
-        .formParam("submit", "Login"))
+        .formParam("submit", "Login")).exitHereIfFailed
         .pause(1)
         .exec(http("Authenticated request")
         .get("/api/account")
@@ -67,9 +67,9 @@ class BtrGatlingTest extends Simulation {
             .exec(http("Create new btr")
             .post("/api/btrs")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "status":"SAMPLE_TEXT", "start_date":"2020-01-01T00:00:00.000Z", "end_date":"2020-01-01T00:00:00.000Z", "location":"SAMPLE_TEXT", "center_cost":"SAMPLE_TEXT", "request_date":"2020-01-01T00:00:00.000Z", "last_modified_date":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "status":"SAMPLE_TEXT", "start_date":"2020-01-01T00:00:00.000Z", "end_date":"2020-01-01T00:00:00.000Z", "location":"SAMPLE_TEXT", "center_cost":"SAMPLE_TEXT", "request_date":"2020-01-01T00:00:00.000Z", "last_modified_date":"2020-01-01T00:00:00.000Z", "suma_totala":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_btr_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_btr_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
                 exec(http("Get created btr")

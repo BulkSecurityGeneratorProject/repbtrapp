@@ -52,9 +52,10 @@
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span translate="btravelappApp.btr.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <!-- 
+                     
                     <th jh-sort-by="start_date"><span translate="btravelappApp.btr.start_date">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="end_date"><span translate="btravelappApp.btr.end_date">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--
                     <th jh-sort-by="location"><span translate="btravelappApp.btr.location">Location</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="center_cost"><span translate="btravelappApp.btr.center_cost">Center_cost</span> <span class="glyphicon glyphicon-sort"></span></th>
                     -->
@@ -69,8 +70,13 @@
                     
                     <th><span><center>Business Travel Request's Expenses</center></span></th>  EXPENSSE-URILE VOR APAREA LA VIEW
                     -->
+                    
+                    <!-- added suma_totala field -->
+                    
                     <th><span><center>Business Travel Request Management</center></span></th>
-                    <th has-authority="ROLE_MANAGER" ><span><center>Business Travel Request Approval</center></span></th>
+                    <th has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'"><span><center>Business Travel Request Approval</center></span></th>
+                    <th jh-sort-by="suma_totala" ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    
                     <th></th>
                 </tr>
             </thead>
@@ -79,13 +85,17 @@
                <!--  <tr ng-repeat="btr in btrs track by btr.id | filter : {assigned_from: 'manager'} : true" > --> 
                     <td><a ui-sref="btr.detail({id:btr.id})">{{btr.id}}</a></td>
                     <td ng-model="status"><b>{{btr.status}}</b></td>
-                    <!--  
+                     
                     <td>{{btr.start_date | date:'medium'}}</td>
-                    <td>{{btr.end_date | date:'medium'}}</td>
+                    <td>{{btr.end_date | date:'medium'}}</td> 
+                    <!-- 
                     <td>{{btr.location}}</td>
                     <td>{{btr.center_cost}}</td>
                     -->
                     <td>{{btr.request_date | date:'medium'}}</td>
+                    
+                    <!-- added suma_totala field -->
+                    
                     <!--  
                     <td>{{btr.last_modified_date | date:'medium'}}</td>
                     <td>
@@ -130,7 +140,7 @@
                        	</div>
                     </td>    
                     -->
-                    <td class="text-right">
+                    <td class="text-right"> 
                         <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
                             <button type="submit"
                                     ui-sref="btr.detail({id:btr.id})"
@@ -188,6 +198,8 @@
                         	</button>
                         </div>
                     </td> 
+                    <td ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'">{{btr.suma_totala}}</td>
+                    
                 </tr>
             </tbody>
         </table>

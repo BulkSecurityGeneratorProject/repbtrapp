@@ -73,123 +73,15 @@ public class Historybtr implements Serializable {
     @Column(name = "last_modified_date", nullable = false)
     private ZonedDateTime last_modified_date;
     
+    @NotNull
+    @Column(name = "suma_totala", nullable = false)
+    private Double suma_totala;
+    
     @ManyToOne
     @JoinColumn(name = "btr_id")
     private Btr btr;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBtrstatusbefore() {
-        return btrstatusbefore;
-    }
-    
-    public void setBtrstatusbefore(String btrstatusbefore) {
-        this.btrstatusbefore = btrstatusbefore;
-    }
-
-    public String getBtrstatusafter() {
-        return btrstatusafter;
-    }
-    
-    public void setBtrstatusafter(String btrstatusafter) {
-        this.btrstatusafter = btrstatusafter;
-    }
-
-    public ZonedDateTime getChange_date() {
-        return change_date;
-    }
-    
-    public void setChange_date(ZonedDateTime change_date) {
-        this.change_date = change_date;
-    }
-
-    public String getChanged_by() {
-        return changed_by;
-    }
-    
-    public void setChanged_by(String changed_by) {
-        this.changed_by = changed_by;
-    }
-
-    public ZonedDateTime getStart_date() {
-        return start_date;
-    }
-    
-    public void setStart_date(ZonedDateTime start_date) {
-        this.start_date = start_date;
-    }
-
-    public ZonedDateTime getEnd_date() {
-        return end_date;
-    }
-    
-    public void setEnd_date(ZonedDateTime end_date) {
-        this.end_date = end_date;
-    }
-
-    public String getAssigned_to() {
-        return assigned_to;
-    }
-    
-    public void setAssigned_to(String assigned_to) {
-        this.assigned_to = assigned_to;
-    }
-
-    public String getAssigned_from() {
-        return assigned_from;
-    }
-    
-    public void setAssigned_from(String assigned_from) {
-        this.assigned_from = assigned_from;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-    
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getCenter_cost() {
-        return center_cost;
-    }
-    
-    public void setCenter_cost(String center_cost) {
-        this.center_cost = center_cost;
-    }
-
-    public ZonedDateTime getRequest_date() {
-        return request_date;
-    }
-    
-    public void setRequest_date(ZonedDateTime request_date) {
-        this.request_date = request_date;
-    }
-
-    public ZonedDateTime getLast_modified_date() {
-        return last_modified_date;
-    }
-    
-    public void setLast_modified_date(ZonedDateTime last_modified_date) {
-        this.last_modified_date = last_modified_date;
-    }
-
-    public Btr getBtr() {
-        return btr;
-    }
-
-    public void setBtr(Btr btr) {
-        this.btr = btr;
-    }
-
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -204,10 +96,130 @@ public class Historybtr implements Serializable {
         return Objects.equals(id, historybtr.id);
     }
 
+	public String getAssigned_from() {
+        return assigned_from;
+    }
+
+    public String getAssigned_to() {
+        return assigned_to;
+    }
+
+    public Btr getBtr() {
+        return btr;
+    }
+
+    public String getBtrstatusafter() {
+        return btrstatusafter;
+    }
+    
+    public String getBtrstatusbefore() {
+        return btrstatusbefore;
+    }
+
+    public String getCenter_cost() {
+        return center_cost;
+    }
+    
+    public ZonedDateTime getChange_date() {
+        return change_date;
+    }
+
+    public String getChanged_by() {
+        return changed_by;
+    }
+    
+    public ZonedDateTime getEnd_date() {
+        return end_date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    
+    public ZonedDateTime getLast_modified_date() {
+        return last_modified_date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+    
+    public ZonedDateTime getRequest_date() {
+        return request_date;
+    }
+
+    public ZonedDateTime getStart_date() {
+        return start_date;
+    }
+    
+    public Double getSuma_totala() {
+		return suma_totala;
+	}
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
     }
+    
+    public void setAssigned_from(String assigned_from) {
+        this.assigned_from = assigned_from;
+    }
+
+    public void setAssigned_to(String assigned_to) {
+        this.assigned_to = assigned_to;
+    }
+    
+    public void setBtr(Btr btr) {
+        this.btr = btr;
+    }
+
+    public void setBtrstatusafter(String btrstatusafter) {
+        this.btrstatusafter = btrstatusafter;
+    }
+    
+    public void setBtrstatusbefore(String btrstatusbefore) {
+        this.btrstatusbefore = btrstatusbefore;
+    }
+
+    public void setCenter_cost(String center_cost) {
+        this.center_cost = center_cost;
+    }
+    
+    public void setChange_date(ZonedDateTime change_date) {
+        this.change_date = change_date;
+    }
+
+    public void setChanged_by(String changed_by) {
+        this.changed_by = changed_by;
+    }
+    
+    public void setEnd_date(ZonedDateTime end_date) {
+        this.end_date = end_date;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public void setLast_modified_date(ZonedDateTime last_modified_date) {
+        this.last_modified_date = last_modified_date;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setRequest_date(ZonedDateTime request_date) {
+        this.request_date = request_date;
+    }
+
+    public void setStart_date(ZonedDateTime start_date) {
+        this.start_date = start_date;
+    }
+
+    public void setSuma_totala(Double suma_totala) {
+		this.suma_totala = suma_totala;
+	}
 
     @Override
     public String toString() {
