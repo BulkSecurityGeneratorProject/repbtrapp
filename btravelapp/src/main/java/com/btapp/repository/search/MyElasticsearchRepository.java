@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
+
 /**
  * Spring Data ElasticSearch repository for the Btr entity.
  */

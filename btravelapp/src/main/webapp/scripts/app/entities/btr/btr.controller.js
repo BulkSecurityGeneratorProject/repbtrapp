@@ -10,6 +10,14 @@ angular.module('btravelappApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 1;
+        
+       /* console.log($scope.btr.assigned_to.idManager);
+        
+        var assignedto = function(result){
+        					//$scope.btr.assigned_to.login=result;
+        					console.log($scope.btr.assigned_to.login);
+        					}
+        	*/
         $scope.loadAll = function() {
             Btr.query({page: $scope.page - 1, size: 25, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));

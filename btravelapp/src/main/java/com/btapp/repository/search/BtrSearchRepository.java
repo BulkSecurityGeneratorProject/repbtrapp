@@ -18,3 +18,4 @@ public interface BtrSearchRepository extends MyElasticsearchRepository {
 	Page<Btr> search(QueryStringQueryBuilder queryStringQuery);
 	
 }
+
