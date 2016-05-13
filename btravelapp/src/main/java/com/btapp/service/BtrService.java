@@ -99,6 +99,8 @@ public class BtrService {
 	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
         }
         
+        
+        
         Btr result = btrRepository.save(btr);
         btrSearchRepository.save(result);
         return result;
@@ -233,10 +235,11 @@ public class BtrService {
     @Transactional(readOnly = true) 
     public List<Btr> search(String query) {
         
-        log.debug("REST request to search Btrs for query {}", query);
+        log.debug("REST request to search Btrs for query {}", query);    
         return StreamSupport
             .stream(btrSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+        
     }
     
     

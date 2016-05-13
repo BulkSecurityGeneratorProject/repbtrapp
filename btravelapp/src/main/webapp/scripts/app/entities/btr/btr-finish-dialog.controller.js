@@ -23,6 +23,7 @@ angular.module('btravelappApp')
         	$scope.isSaving = true;
         	console.log($scope.btr.id); // asta imi returneaza id-ul
         	$scope.btr.status="Finished";
+        	//$scope.btr.assigned_to = $scope.btr.user;
         	Btr.update($scope.btr, onSaveSuccess, onSaveError);
         	
         };
