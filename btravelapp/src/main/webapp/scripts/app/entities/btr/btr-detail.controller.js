@@ -32,3 +32,4 @@ angular.module('btravelappApp')
         };
         $scope.loadAll();*/
     });
+
