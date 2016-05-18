@@ -176,6 +176,15 @@
                                 <span class="hidden-xs hidden-sm" translate="entity.action.close"></span>
                             </button>
                             
+                            <!--  buton de schimbare expense-uri btr -->
+                            <button type="submit" 
+                        			ui-sref="btr.change({id:btr.id})"
+                        			class="btn btn-warning" 
+                        			ng-show="btr.status=='Issuing ticket'"> 
+                        		<span class="glyphicon glyphicon-edit"></span><span translate="entity.action.change">Change</span>
+                        	</button>
+                            
+                            
                             <button type="submit"
                                     ui-sref="btr.delete({id:btr.id})"
                                     class="btn btn-danger btn-sm"

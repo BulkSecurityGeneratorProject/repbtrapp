@@ -229,6 +229,40 @@ angular.module('btravelappApp')
             }]
         })
         
+        
+     // change
+        .state('btr.change', {
+            parent: 'btr',
+            url: '/{id}/change',
+            data: {
+                //authorities: ['ROLE_USER'], MODIFICAT 08.03.2016
+            	authorities: ['ROLE_SUPPLIER'],
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'scripts/app/entities/btr/btr-change-dialog.html',
+                    controller: 'BtrChangeController',
+                    size: 'md',
+                    resolve: {
+                    	//entity: function () {
+                          //  return {
+                            	entity: ['Btr', function(Btr) {
+                            		//console.log(id);
+                            		console.log($stateParams.id);
+                            		//console.log(btr);
+                                    return Btr.get({id : $stateParams.id});                                  
+                                }]                              
+                            //};
+                        //}
+                    }
+                }).result.then(function(result) {
+                    $state.go('btr', null, { reload: true });
+                }, function() {
+                    $state.go('^');
+                })
+            }]
+        })
+        
      // approve
         .state('btr.approve', {
             parent: 'btr',

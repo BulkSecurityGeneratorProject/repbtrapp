@@ -35,5 +35,22 @@
     <cache name="com.btapp.domain.PersistentAuditEvent"
            timeToLiveSeconds="3600">
     </cache>
+    
+    <!-- added -->
+    <cache name="com.btapp.domain.Btr"
+           timeToLiveSeconds="3600">
+    </cache>
+    <cache name="com.btapp.domain.Comments"
+           timeToLiveSeconds="3600">
+    </cache>
+    <cache name="com.btapp.domain.Expense_type"
+           timeToLiveSeconds="3600">
+    </cache>
+    <cache name="com.btapp.domain.Expense"
+           timeToLiveSeconds="3600">
+    </cache>
+    <cache name="com.btapp.domain.Historybtr"
+           timeToLiveSeconds="3600">
+    </cache>
 </ehcache>
 

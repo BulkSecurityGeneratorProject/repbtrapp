@@ -236,7 +236,7 @@ public class BtrService {
     public List<Btr> search(String query) {
         
         log.debug("REST request to search Btrs for query {}", query);    
-        return StreamSupport
+        return (List<Btr>) StreamSupport
             .stream(btrSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
         

@@ -144,7 +144,7 @@ public class BtrResourceIntTest {
         assertThat(testBtr.getSuma_totala()).isEqualTo(DEFAULT_SUMA_TOTALA);
 
         // Validate the Btr in ElasticSearch
-        Btr btrEs = btrSearchRepository.findOne(testBtr.getId());
+        Btr btrEs = (Btr) btrSearchRepository.findOne(testBtr.getId());
         assertThat(btrEs).isEqualToComparingFieldByField(testBtr);
     }
 
@@ -381,7 +381,7 @@ public class BtrResourceIntTest {
         assertThat(testBtr.getSuma_totala()).isEqualTo(UPDATED_SUMA_TOTALA);
 
         // Validate the Btr in ElasticSearch
-        Btr btrEs = btrSearchRepository.findOne(testBtr.getId());
+        Btr btrEs = (Btr) btrSearchRepository.findOne(testBtr.getId());
         assertThat(btrEs).isEqualToComparingFieldByField(testBtr);
     }
 

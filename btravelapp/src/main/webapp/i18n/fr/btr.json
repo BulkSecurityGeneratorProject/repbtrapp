@@ -23,7 +23,10 @@
              "reject": {
                 "questionreject": "Êtes-vous sûr de vouloir rejeter le Demande Voyage d'affaires No.{{ id }}?"
             },
-             "rapprove": {
+            "change": {
+                "questionchange": "Etes-vous sûr il y a des changements à Voyage d'affaires Demande No. {{Id}} dépenses"
+            },
+            "approve": {
                 "questionapprove": "Êtes-vous sûr de vouloir approuver le Demande Voyage d'affaires No.{{ id }}?"
             },
             "detail": {

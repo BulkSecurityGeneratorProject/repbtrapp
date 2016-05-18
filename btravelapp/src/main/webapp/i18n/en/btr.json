@@ -23,6 +23,9 @@
             "reject": {
                 "questionreject": "Are you sure you want to reject Business Travel Request No.{{ id }}?"
             },
+            "change": {
+                "questionchange": "Are you sure there are changes to Business Travel Request No.{{ id }} expenses?"
+            },
             "approve": {
                 "questionapprove": "Are you sure you want to approve Business Travel Request No.{{ id }}?"
             },

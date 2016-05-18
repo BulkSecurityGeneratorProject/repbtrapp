@@ -93,6 +93,7 @@
             "close": "Close",
             "finish": "Finish",
             "reject": "Reject",
+            "change": "Change",
             "approve": "Approve"
         },
         "detail": {
@@ -110,6 +111,9 @@
         },
         "reject": {
             "title": "Confirm reject operation"
+        },
+        "change": {
+            "title": "Confirm change operation"
         },
         "approve": {
             "title": "Confirm approve operation"
