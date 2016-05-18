@@ -180,6 +180,7 @@
                             <button type="submit" 
                         			ui-sref="btr.change({id:btr.id})"
                         			class="btn btn-warning" 
+                        			has-any-authority="ROLE_SUPPLIER"
                         			ng-show="btr.status=='Issuing ticket'"> 
                         		<span class="glyphicon glyphicon-edit"></span><span translate="entity.action.change">Change</span>
                         	</button>
@@ -196,9 +197,10 @@
                     </td> 
                     <td class="text-right" has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'">
                         <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
+                        <!--  ng-disabled="isDisabled" ng-click="disableButton()"   il pusesem sa dispara butonu dupa apasare-->
                         	<button type="submit" 
                         			ui-sref="btr.approve({id:btr.id})"
-                        			class="btn btn-success btn-sm" > 
+                        			class="btn btn-success btn-sm"> 
                         		<span class="glyphicon glyphicon-thumbs-up"></span><span translate="entity.action.approve">Approve</span>
                         	</button>
                         	<button type="submit" 

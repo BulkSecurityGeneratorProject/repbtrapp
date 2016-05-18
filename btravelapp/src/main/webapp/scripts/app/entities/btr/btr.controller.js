@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense) {
+    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense, User) {
 
     	//added expense
     	$scope.expenses = [];
@@ -72,12 +72,21 @@ angular.module('btravelappApp')
         };
       
    
-        /* INCERCARE RETARDATA 
-         * $http.get('api/users/'+$scope.btr.assigned_to.idManager).then(function(response){
-				debugger;
-				$scope.btr.assigned_to=response.data;
-				console.log(response.data); // tot obiectul manager2
-				return response.data;
-			});
-        */
+       /* $scope.isDisabled = false;
+
+        $scope.disableButton = function() {
+            $scope.isDisabled = true;
+        }*/
+        
+        //$scope.currentUser = function () {
+        //    return User.get();
+        //}
+        
+        //$scope.isAssignedTo = function(login){
+        //	if($scope.btr.assigned_to == login)
+        //		return true;
+        //	else
+        //		return false;
+       // }
+
     });

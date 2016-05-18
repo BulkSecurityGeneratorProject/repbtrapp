@@ -72,4 +72,7 @@ angular.module('btravelappApp').controller('BtrDialogController',
         $scope.datePickerForLast_modified_dateOpen = function($event) {
             $scope.datePickerForLast_modified_date.status.opened = true;
         };
+        
+        
+        
 }]);

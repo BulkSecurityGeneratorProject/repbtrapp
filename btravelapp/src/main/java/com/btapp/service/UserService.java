@@ -14,6 +14,7 @@ import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -234,5 +235,13 @@ public class UserService {
             userRepository.delete(user);
             userSearchRepository.delete(user);
         }
+    }
+    
+    // get the login of all managers       prima incercare: findManagers();
+    @Transactional(readOnly = true)
+    public Optional<User> findManagers() {
+        Optional<User> user = userRepository.findAllByAuthorities(null);
+        //user.getAuthorities().size(); // eagerly load the association
+        return user;
     }
 }
