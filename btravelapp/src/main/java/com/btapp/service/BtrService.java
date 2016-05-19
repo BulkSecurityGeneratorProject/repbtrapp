@@ -139,6 +139,7 @@ public class BtrService {
     public Btr findOne(Long id) {
         log.debug("Request to get Btr : {}", id);
         Btr btr = btrRepository.findOne(id);
+        btr.getExpenses().size();
         return btr;
     }
 

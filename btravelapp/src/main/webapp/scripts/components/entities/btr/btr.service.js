@@ -7,6 +7,7 @@ angular.module('btravelappApp')
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
+                	console.log(data);
                     data = angular.fromJson(data);
                     data.start_date = DateUtils.convertDateTimeFromServer(data.start_date);
                     data.end_date = DateUtils.convertDateTimeFromServer(data.end_date);

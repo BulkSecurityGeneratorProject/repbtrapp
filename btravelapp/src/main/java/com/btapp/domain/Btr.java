@@ -69,8 +69,7 @@ public class Btr implements Serializable {
     private User user;
 
 	@OneToMany(mappedBy = "btr")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@JsonIgnore
     private Set<Expense> expenses = new HashSet<>();
 
 	@ManyToOne
@@ -241,6 +240,7 @@ public class Btr implements Serializable {
             ", request_date='" + request_date + "'" +
             ", last_modified_date='" + last_modified_date + "'" +
             ", suma_totala='" + suma_totala + "'" +
+            ", expensesNO='" + expenses.size() + "'" +
             '}';
     }
 

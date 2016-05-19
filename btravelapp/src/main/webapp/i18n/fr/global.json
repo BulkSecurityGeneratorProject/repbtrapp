@@ -77,7 +77,12 @@
             }
         },
         "field": {
-            "id": "No."
+            "id": "No.",
+            "expense_cost": "Frais Coût",
+            "btr": "BTR",
+            "expense_type": "Type de dépense",
+            "norow": "Il n'y a pas de frais pour vous maintenant.",
+            "newcost": "Les frais de demande Voyage d'affaires"
         }
     },
     "entity": {

@@ -77,7 +77,12 @@
             }
         },
         "field": {
-            "id": "No."
+            "id": "No.",
+            "expense_cost": "Expense Cost",
+            "btr": "BTR",
+            "expense_type": "Expense Type",
+            "norow": "There is no expensses for you now.",
+            "newcost": "Expenses for Business Travel Request"
         }
     },
     "entity": {
@@ -138,6 +143,6 @@
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
-    },
+    }, 
     "footer": "&#169;Licenta 2015-2016 Radu Constantin Cristian"
 }

@@ -4,21 +4,23 @@ angular.module('btravelappApp')
     .controller('BtrDetailController', function ($scope, $rootScope, $stateParams, entity, Btr, User, Expense) {
         $scope.expense = entity;
     	$scope.btr = entity;
+    	console.log($scope.btr.expenses.length);
         $scope.load = function (id) {
             Btr.get({id: id}, function(result) {
                 $scope.btr = result;
             });
-            // added expense
-            Expense.get({id: id}, function(result) {
-                $scope.expense = result;
-            });
+            
         };
         var unsubscribe = $rootScope.$on('btravelappApp:btrUpdate', function(event, result) {
             $scope.btr = result;
         });
         $scope.$on('$destroy', unsubscribe);
-
-        /* expensses added
+/*
+         //expensses added
+        $scope.expenses = [];
+        $scope.predicate = 'id';
+        $scope.reverse = true;
+        $scope.page = 1;
         $scope.loadAll = function() {
             Expense.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -30,6 +32,17 @@ angular.module('btravelappApp')
             $scope.page = page;
             $scope.loadAll();
         };
-        $scope.loadAll();*/
+        //$scope.loadAll();
+        $scope.refresh = function () {
+            $scope.loadAll();
+            $scope.clear();
+        };
+
+        $scope.clear = function () {
+            $scope.expense = {
+                expense_cost: null,
+                id: null
+            };
+        };*/
     });
 

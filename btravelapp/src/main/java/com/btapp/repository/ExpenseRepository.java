@@ -1,29 +1,22 @@
 package com.btapp.repository;
 
-import com.btapp.domain.Btr;
-import com.btapp.domain.Expense;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import com.btapp.domain.Expense;
 
 
 /**
  * Spring Data JPA repository for the Expense entity.
  */
 public interface ExpenseRepository extends JpaRepository<Expense,Long> {
-
-/*
-	@Query("select btr_id from Expense btr where btr.id = ?#{principal.btr_id}")
-	List<Btr> findOneById(); // adaugat 31.03.2016 :id
-	*/
-
-	@Query("select e from Expense e WHERE e.btr.id= ?1")
-	List<Expense> findOneById(Long id);
 	
-	//on (expense.btr.id = btr.id) hibernate leaga automat
+	@Query("select e from Expense e WHERE e.btr.id= ?1")
+ 	List<Expense> findOneById(Long id);
 	
 	@Query("select expense from Expense expense join expense.btr btr where"
     		+ " expense.btr.status != 'Closed'"

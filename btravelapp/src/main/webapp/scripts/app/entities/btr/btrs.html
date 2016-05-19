@@ -51,6 +51,10 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="btrs.length!=0 ">
                 	<p ng-hide="btrs.length!=0" translate="btravelappApp.btr.home.norow"></p>
+						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 && btrs.length<5 "><p>Number of requests <span class="badge">{{btrs.length}}</span></p></div>
+						<div class="alert alert-info" role="alert" ng-show="btrs.length>=5 && btrs.length<10 "><p>You have <span class="badge">{{btrs.length}}</span> requests.</p></div>
+						<div class="alert alert-warning" role="alert" ng-show="btrs.length>=10 && btrs.length<20 "><p>You have <span class="badge">{{btrs.length}}</span> requests.</p></div>
+						<div class="alert alert-danger" role="alert" ng-show="btrs.length>=20"><p>You have <span class="badge">{{btrs.length}}</span> requests.</p></div>
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span translate="btravelappApp.btr.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                      
@@ -217,6 +221,41 @@
         </table>
     </div>
       <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager> 
+      <!--  incercare -- de discutat!!
+      <div class="progress" has-authority="ROLE_MANAGER" ng-show="btrs.length!=0 > 
+  			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Finished</label>
+   				 <span class="sr-only" >{{btrs.length | filter:'Finished'}} Finished (success)</span>
+  			</div>
+  			<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Initiated</label>
+   				 <span class="sr-only" >{{btrs.length | filter:'Initiated'}} Initiated (warning)</span>
+  			</div>
+  			<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Waiting for approval</label>
+    			<span class="sr-only" >{{btrs.length | filter:'Waiting for approval'}} Waiting for approval (danger)</span>
+  			</div>
+		</div>
+
+		<div class="progress" has-authority="ROLE_SUPPLIER" ng-show="btrs.length!=0 > 
+  			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Finished</label>
+   				 <span class="sr-only" >{{btrs.length | filter:'Finished'}} Finished (success)</span>
+  			</div>
+  			<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Initiated</label>
+   				 <span class="sr-only" >{{btrs.length | filter:'Initiated'}} Initiated (warning)</span>
+  			</div> 
+  			<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Waiting for approval</label>
+    			<span class="sr-only" >{{btrs.length | filter:'Waiting for approval'}} Waiting for approval (danger)</span>
+  			</div>
+  			<div class="progress-bar progress-bar-info progress-bar-striped" style="width: {{btrs.length}}%" >
+  				<label>Issuing Tickets</label>
+    			<span class="sr-only" >{{btrs.length | filter:'Issuing Tickets'}} Issuing Tickets (info)</span>
+  			</div>
+		</div>
+		-->
 </div>
 
 

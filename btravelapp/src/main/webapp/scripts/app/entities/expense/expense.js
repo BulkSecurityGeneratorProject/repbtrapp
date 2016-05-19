@@ -77,6 +77,8 @@ angular.module('btravelappApp')
                     })
                 }]
             })
+            
+            
             .state('expense.edit', {
                 parent: 'expense',
                 url: '/{id}/edit',

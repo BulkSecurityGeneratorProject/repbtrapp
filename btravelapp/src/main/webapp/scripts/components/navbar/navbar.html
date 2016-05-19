@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar navbar-inverse" role="navigation" >
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -31,13 +31,13 @@
                     <ul class="dropdown-menu">
                         <li ui-sref-active="active" ><a ui-sref="btr" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.btr">Btr</span></a></li>
-                        <li ui-sref-active="active" has-authority="ROLE_SUPPLIER"><a ui-sref="expense_type" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                        <li ui-sref-active="active" has-authority="ROLE_ADMIN"><a ui-sref="expense_type" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.expense_type">Expense type</span></a></li>
                         <li ui-sref-active="active" ><a ui-sref="expense" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.expense">Expense</span></a></li>
                         <li ui-sref-active="active" ><a ui-sref="comments" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.comments">Comments</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="historybtr" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                        <li ui-sref-active="active" has-authority="ROLE_MANAGER"><a ui-sref="historybtr" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.historybtr">Historybtr</span></a></li>
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                     </ul>
