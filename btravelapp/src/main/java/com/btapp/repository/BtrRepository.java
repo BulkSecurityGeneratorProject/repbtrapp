@@ -39,6 +39,6 @@ public interface BtrRepository extends JpaRepository<Btr,Long> {
     Page<Btr> finByAssigned_toOrEmployeeIsCurrentUser(Pageable pageable);
 
    // @Query("select e from btr.expenses e where e.btr.id= ?1")
-  //  List<Expense> findAllExpensesForBtrById(Long id);
+   // List<Expense> findAllExpensesForBtrById(Long id);
 
 }

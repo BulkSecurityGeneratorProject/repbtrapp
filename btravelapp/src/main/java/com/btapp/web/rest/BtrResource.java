@@ -92,7 +92,7 @@ public class BtrResource {
     /**
      * GET  /btrs/:id -> get the "id" btr.
      */
-    @RequestMapping(value = "/btrs/{id}",///expenses/{btr.id}",
+    @RequestMapping(value = "/btr/{id}",///expenses/{btr.id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

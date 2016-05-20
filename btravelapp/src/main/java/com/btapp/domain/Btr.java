@@ -68,7 +68,7 @@ public class Btr implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-	@OneToMany(mappedBy = "btr")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "btr", cascade = CascadeType.ALL)
 	@JsonIgnore
     private Set<Expense> expenses = new HashSet<>();
 

@@ -33,12 +33,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     Optional<User> findAllByAuthorities(Authority authority);  // adaugat 11.03.2016
 
-    // find all the managers
-    //@Query("SELECT u.LOGIN FROM JHI_USER u join JHI_USER_AUTHORITY ua on u.ID = ua.USER_ID where ua.AUTHORITY_NAME = 'ROLE_MANAGER' ")
-    /*@Query("SELECT user FROM jhi_user user join user.jhi_user_authority authorities "
-    		+ "where authorities.AUTHORITY_NAME = 'ROLE_MANAGER' ")
-    Optional<User> findManagers();
-    */
+    // find all employees for a manager
+    @Query("SELECT u FROM User u where u.idManager = ?#{principal.username}")
+    Optional<User> findAllEmployeesForManager(String idManager);
+    
     @Override
     void delete(User t);
 

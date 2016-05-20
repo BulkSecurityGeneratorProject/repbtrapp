@@ -82,7 +82,8 @@
             "btr": "BTR",
             "expense_type": "Expense Type",
             "norow": "There is no expensses for you now.",
-            "newcost": "Expenses for Business Travel Request"
+            "newcost": "Expenses for Business Travel Request",
+            "comment": "Comment"
         }
     },
     "entity": {

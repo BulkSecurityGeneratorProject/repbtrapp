@@ -237,10 +237,27 @@ public class UserService {
         }
     }
     
+    /* get the login of all managers       prima incercare: findManagers();
+    @Transactional(readOnly = true)
+    public Optional<User> findManagers() {
+        Optional<User> user = userRepository.findAllByAuthorities(null);
+        //user.getAuthorities().size(); // eagerly load the association
+        return user;
+    }
+    
     // get the login of all managers       prima incercare: findManagers();
     @Transactional(readOnly = true)
     public Optional<User> findManagers() {
         Optional<User> user = userRepository.findAllByAuthorities(null);
+        //user.getAuthorities().size(); // eagerly load the association
+        return user;
+    }
+    */
+    
+    // get all manager's employees      
+    @Transactional(readOnly = true)
+    public Optional<User> findEmployees() {
+        Optional<User> user = userRepository.findAllEmployeesForManager(SecurityUtils.getCurrentUser().getUsername());
         //user.getAuthorities().size(); // eagerly load the association
         return user;
     }

@@ -17,7 +17,7 @@
             "detail": {
                 "title": "Expense"
             },
-            "expense_cost": "Frais Coût",
+            "expense_cost": "Frais Coût(Euro)",
             "btr": "BTR",
             "expense_type": "Type de dépense"
         }

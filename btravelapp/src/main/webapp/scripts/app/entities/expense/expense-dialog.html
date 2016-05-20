@@ -16,10 +16,12 @@
         </div>
         -->
         <div class="form-group">
-            <label class="control-label" translate="btravelappApp.expense.expense_cost" for="field_expense_cost">Expense_cost</label>
+            <label class="control-label" translate="btravelappApp.expense.expense_cost" for="field_expense_cost">Expense_cost(Euro)</label>
+            
             <input type="number" class="form-control" name="expense_cost" id="field_expense_cost"
                     ng-model="expense.expense_cost"
                     required />
+            
             <div ng-show="editForm.expense_cost.$invalid">
                 <p class="help-block"
                     ng-show="editForm.expense_cost.$error.required" translate="entity.validation.required">

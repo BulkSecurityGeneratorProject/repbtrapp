@@ -7,6 +7,7 @@ angular.module('btravelappApp').controller('BtrDialogController',
     	//$scope.authorities = ["ROLE_MANAGER", "ROLE_SUPPLIER"]; // adaugat 31.03.2016
         $scope.btr = entity;
         $scope.users = User.query();
+        $scope.user = entity;
         $scope.expenses = Expense.query();
         $scope.load = function(id) {
             Btr.get({id : id}, function(result) {
@@ -73,6 +74,29 @@ angular.module('btravelappApp').controller('BtrDialogController',
             $scope.datePickerForLast_modified_date.status.opened = true;
         };
         
+        // supplier list   
+        $scope.suppliers = function() {
+        	$http({
+        		method : 'GET',
+        		url: 'api/users/supplier/' + $scope.user.id
+        	}).then(function successCallback(response){
+        		$scope.isSaving = true;
+        		$scope.btr.assigned_to = response.data;        		
+        	}, function errorCallback(response){
+        		
+        	});
+        };
         
-        
+        // manager's employees
+        $scope.employees = function() {
+        	$http({
+        		method : 'GET',
+        		url: 'api/users/employees/' + $scope.btr.user.id
+        	}).then(function successCallback(response){
+        		$scope.isSaving = true;
+        		$scope.btr.user = response.data;        		
+        	}, function errorCallback(response){
+        		
+        	});
+        };
 }]);

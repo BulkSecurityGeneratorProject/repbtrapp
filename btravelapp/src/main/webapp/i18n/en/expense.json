@@ -17,7 +17,7 @@
             "detail": {
                 "title": "Expense"
             },
-            "expense_cost": "Expense Cost",
+            "expense_cost": "Expense Cost(Euro)",
             "btr": "BTR",
             "expense_type": "Expense Type"
         }

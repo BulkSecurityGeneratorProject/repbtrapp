@@ -6,7 +6,8 @@
                 "createLabel": "Create a new Business Travel Request",
                 "createOrEditLabel": "Create or edit a Business Travel Request",
                 "search": "Search for Btr",
-                "norow": "There is no request for you now."
+                "norow": "There is no request for you now.",
+                "norequest": "Number of requests: "
             },
             "created": "A new Business Travel Request is created with identifier {{ param }}",
             "updated": "A Business Travel Request is updated with identifier {{ param }}",

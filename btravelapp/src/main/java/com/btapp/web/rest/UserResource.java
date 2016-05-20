@@ -199,7 +199,7 @@ public class UserResource {
     /**
      * GET  /users/manager -> get the "login" user for managers
      */
-    @RequestMapping(value = "/users/manager",
+    @RequestMapping(value = "/users/manager/{login:[_'.@a-z0-9-]+}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -212,14 +212,14 @@ public class UserResource {
     }
     
     
-    /*
+   
     
     
- // modificat 18.05.2016
+ // modificat 19.05.2016
     /**
      * GET  /users/supplier -> get the "login" user for supplier
-     
-    @RequestMapping(value = "/users/supplier",
+     */
+    @RequestMapping(value = "/users/supplier/{login:[_'.@a-z0-9-]+}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -231,6 +231,21 @@ public class UserResource {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
+// get manager's employees
+    /**
+     * GET  /users/:login -> get the "login" manager user.
+     */
+    @RequestMapping(value = "/users/employees/{login:[_'.@a-z0-9-]+}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ManagedUserDTO> getEmployee(@PathVariable String login) {
+        log.debug("REST request to get User : {}", login);
+        return userService.findEmployees()
+                .map(ManagedUserDTO::new)
+                .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
     
     /**
      * DELETE  USER :login -> delete the "login" User.

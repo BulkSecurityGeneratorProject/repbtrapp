@@ -13,11 +13,13 @@ angular.module('btravelappApp')
         
        /* console.log($scope.btr.assigned_to.idManager);
         
-        var assignedto = function(result){
+        var assignedto = function(){
+        					$scope.currentUser = Parse.User.current();
         					//$scope.btr.assigned_to.login=result;
         					console.log($scope.btr.assigned_to.login);
         					}
         	*/
+
         $scope.loadAll = function() {
             Btr.query({page: $scope.page - 1, size: 25, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -71,7 +73,13 @@ angular.module('btravelappApp')
             
         };
       
-   
+        $scope.statusuri = [
+                        'Initiated',
+                        'Finished',
+                        'Waiting for approval',
+                        'Issuing Tickets'
+                    ];
+        
        /* $scope.isDisabled = false;
 
         $scope.disableButton = function() {
@@ -90,3 +98,4 @@ angular.module('btravelappApp')
        // }
 
     });
+

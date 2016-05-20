@@ -6,7 +6,6 @@ angular.module('btravelappApp').controller('UserManagementDialogController',
 
     	//added 18.05.2016
     	//$scope.managers = managers.query();
-    	$scope.manager = entity;
     	
     	$scope.users = User.query(); //adaugat 11.03.2016
         $scope.user = entity;
@@ -40,7 +39,7 @@ angular.module('btravelappApp').controller('UserManagementDialogController',
         $scope.managers = function() {
         $http({
 			method : 'GET',
-			url : '/api/users/managers' 
+			url : '/api/users'
 		}).then(function successCallback(response) {
 			$scope.isSaving = true;
 

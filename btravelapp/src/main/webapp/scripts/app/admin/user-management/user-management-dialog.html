@@ -84,7 +84,7 @@
         	<label translate="user-management.idManager" for="field_in_manager">ID Manager</label>
              <!-- <input type="text" class="form-control" name="idManager" ng-model="user.idManager"> ng-hide="::filter.idManager != null" -->
             <select  class="form-control" name="manager" id="field_in_manager" ng-model="manager.login" 
-             	ng-options="manager.login as manager.login for manager in managers">
+             	ng-options="user.login as user.login for manager in managers">
         			<option value=""></option>
      		</select>
         </div>

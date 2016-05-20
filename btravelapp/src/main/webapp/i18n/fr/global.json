@@ -82,7 +82,8 @@
             "btr": "BTR",
             "expense_type": "Type de dépense",
             "norow": "Il n'y a pas de frais pour vous maintenant.",
-            "newcost": "Les frais de demande Voyage d'affaires"
+            "newcost": "Les frais de demande Voyage d'affaires",
+            "comment": "Commentaire"
         }
     },
     "entity": {

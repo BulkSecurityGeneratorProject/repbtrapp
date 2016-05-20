@@ -40,8 +40,11 @@ public class BtrService {
     @Inject
     private BtrSearchRepository btrSearchRepository;
     
-    //@Inject
+   // @Inject
    // private Historybtr historybtr;
+    
+   // @Inject
+   // private com.btapp.repository.HistorybtrRepository historybtrRepository;
     
     /**
      * Save a btr.
@@ -75,20 +78,6 @@ public class BtrService {
 	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
 	        btr.setSuma_totala(null);
 	        
-	        /*history line added
-	        historybtr.setAssigned_from(btr.getAssigned_from().getLogin());
-	        historybtr.setAssigned_to(btr.getAssigned_to().getLogin());
-	        historybtr.setBtr(btr);
-	        historybtr.setBtrstatusafter("N/A");
-	        historybtr.setBtrstatusbefore("Initiated");
-	        historybtr.setCenter_cost(btr.getCenter_cost());
-	        historybtr.setChange_date(btr.getLast_modified_date());
-	        historybtr.setChanged_by(btr.getAssigned_from().getLogin());
-	        historybtr.setEnd_date(btr.getEnd_date());
-	        historybtr.setLast_modified_date(btr.getLast_modified_date());
-	        historybtr.setLocation(btr.getLocation());
-	        historybtr.setRequest_date(btr.getRequest_date());
-	        historybtr.setStart_date(btr.getStart_date());*/
         }
         else
         {
@@ -99,7 +88,20 @@ public class BtrService {
 	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
         }
         
-        
+        //history line added
+        //historybtr.setAssigned_from(btr.getAssigned_from().getLogin());
+        //historybtr.setAssigned_to(btr.getAssigned_to().getLogin());
+        //historybtr.setBtr(btr);
+//        historybtr.setCenter_cost(btr.getCenter_cost());
+//        historybtr.setChange_date(btr.getLast_modified_date());
+//        historybtr.setChanged_by(btr.getAssigned_from().getLogin());
+//        historybtr.setEnd_date(btr.getEnd_date());
+//        historybtr.setLast_modified_date(btr.getLast_modified_date());
+//        historybtr.setLocation(btr.getLocation());
+//        historybtr.setRequest_date(btr.getRequest_date());
+//        historybtr.setStart_date(btr.getStart_date());
+//        
+//        historybtrRepository.save(historybtr);
         
         Btr result = btrRepository.save(btr);
         btrSearchRepository.save(result);

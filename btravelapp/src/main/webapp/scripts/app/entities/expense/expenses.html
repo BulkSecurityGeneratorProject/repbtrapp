@@ -41,7 +41,7 @@ class="hidden-xs"                        translate="btravelappApp.expense.home.c
             <tbody>
                 <tr ng-repeat="expense in expenses track by expense.id">
                     <td><a ui-sref="expense.detail({id:expense.id})">{{expense.id}}</a></td>
-                    <td>{{expense.expense_cost}}</td>
+                    <td>{{expense.expense_cost}}<span class="glyphicon glyphicon-euro input-sm"></span></td>
                     <td>
                         <a ui-sref="btr.detail({id:expense.btr.id})">{{expense.btr.id}}</a>
                     </td>

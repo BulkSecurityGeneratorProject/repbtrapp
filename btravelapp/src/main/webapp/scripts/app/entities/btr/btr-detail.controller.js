@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .controller('BtrDetailController', function ($scope, $rootScope, $stateParams, entity, Btr, User, Expense) {
+    .controller('BtrDetailController', function ($scope, $rootScope, $stateParams, $http, entity, Btr, User, Expense) {
         $scope.expense = entity;
     	$scope.btr = entity;
-    	console.log($scope.btr.expenses.length);
+    	//console.log($scope.btr.expenses.length);
         $scope.load = function (id) {
             Btr.get({id: id}, function(result) {
                 $scope.btr = result;
@@ -15,34 +15,25 @@ angular.module('btravelappApp')
             $scope.btr = result;
         });
         $scope.$on('$destroy', unsubscribe);
-/*
-         //expensses added
-        $scope.expenses = [];
-        $scope.predicate = 'id';
-        $scope.reverse = true;
-        $scope.page = 1;
+
         $scope.loadAll = function() {
-            Expense.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                $scope.totalItems = headers('X-Total-Count');
-                $scope.expenses = result;
-            });
+        	$http({
+        		method : 'GET',
+        		url: 'api/btrs/' + $scope.btr.id
+        	}).then(function successCallback(response){
+        		$scope.isSaving = true;
+        		$scope.btr.expenses = response.data;
+        		//console.log($scope.response.data);
+        		
+        	}, function errorCallback(response){
+        		
+        	});
         };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
-        };
-        //$scope.loadAll();
+        $scope.loadAll();
         $scope.refresh = function () {
             $scope.loadAll();
             $scope.clear();
         };
 
-        $scope.clear = function () {
-            $scope.expense = {
-                expense_cost: null,
-                id: null
-            };
-        };*/
     });
 

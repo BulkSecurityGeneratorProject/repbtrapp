@@ -21,6 +21,7 @@
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
+                        
                     </div>
                     <!--  INCERCARE MULTI-SELECT PENTRU STATUS 				05.042016 
                     <div class="input-group pull-right" >
@@ -51,10 +52,13 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="btrs.length!=0 ">
                 	<p ng-hide="btrs.length!=0" translate="btravelappApp.btr.home.norow"></p>
-						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 && btrs.length<5 "><p>Number of requests <span class="badge">{{btrs.length}}</span></p></div>
-						<div class="alert alert-info" role="alert" ng-show="btrs.length>=5 && btrs.length<10 "><p>You have <span class="badge">{{btrs.length}}</span> requests.</p></div>
-						<div class="alert alert-warning" role="alert" ng-show="btrs.length>=10 && btrs.length<20 "><p>You have <span class="badge">{{btrs.length}}</span> requests.</p></div>
-						<div class="alert alert-danger" role="alert" ng-show="btrs.length>=20"><p>You have <span class="badge">{{btrs.length}}</span> requests.</p></div>
+						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1"><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
+						<!--  
+						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 && btrs.length<5 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
+						<div class="alert alert-info" role="alert" ng-show="btrs.length>=5 && btrs.length<10 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
+						<div class="alert alert-warning" role="alert" ng-show="btrs.length>=10 && btrs.length<20 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
+						<div class="alert alert-danger" role="alert" ng-show="btrs.length>=20"><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
+                    	-->
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span translate="btravelappApp.btr.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                      
@@ -80,6 +84,7 @@
                     
                     <th><span><center>Business Travel Request Management</center></span></th>
                     <th has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'"><span><center>Business Travel Request Approval</center></span></th>
+                    <th has-authority="ROLE_SUPPLIER" ng-show="btr.status=='Issuing ticket'"><span><center>Attachment</center></span></th>
                     <th jh-sort-by="suma_totala" ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
                     
                     <th></th>
@@ -213,7 +218,96 @@
                         		<span class="glyphicon glyphicon-thumbs-down"></span><span translate="entity.action.reject">Reject</span>
                         	</button>
                         </div>
-                    </td> 
+                    </td>
+      <!--  attachment added upload --> 
+                    <td has-authority="ROLE_SUPPLIER" ng-show="btr.status=='Issuing ticket'">
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+    <script src="https://da189i1jfloii.cloudfront.net/js/kinvey-angular-1.1.4.min.js"></script>
+</head>
+
+
+<body ng-app="kinveyUploadApp" ng-controller="MainCtrl as main">
+
+<input type="file" id="files" name="files[]"/>
+
+<p ng-if="main.fileModel">
+    File Size: {{main.fileModel.size}} Last Modified: {{main.fileModel['_kmd'].lmt | date:'yyyy-MM-dd HH:mm:ss Z'}}
+</p>
+
+<script>
+    angular.module('kinveyUploadApp', ['kinvey'])
+            .run(['$kinvey', function ($kinvey) {
+                // Kinvey initialization starts
+                var promise = $kinvey.init({
+                    appKey: '',
+                    appSecret: ''
+                });
+                promise.then(function () {
+                    // Kinvey initialization finished with success
+                    console.log("Kinvey init with success");
+
+                    var user = $kinvey.getActiveUser();
+                    if (null === user) {
+                        return  $kinvey.User.login({
+                            username: 'test',
+                            password: 'test'
+                        });
+                    } else {
+                        return user;
+                    }
+                }).then(function (_user) {
+                    console.log("Kinvey got user " + JSON.stringify(_user));
+                }, function (errorCallback) {
+                    // Kinvey initialization finished with error
+                    console.log("Kinvey init with error: " + JSON.stringify(errorCallback));
+                });
+            }])
+
+            .controller('MainCtrl', [ '$kinvey', function ($kinvey) {
+                var that = this;
+                this.fileModel = {};
+                this.teststring = 'test string value';
+
+                angular.element(document).find('input')[0].addEventListener('change', function (e) {
+                    var theFile = e.target.files[0];
+
+                    // save the file object
+
+                    var promise = $kinvey.File.upload(theFile, {
+                        _filename: theFile.name,
+                        public: true,
+                        size: theFile.size,
+                        mimeType: theFile.type
+                    }).then(function (_fileData) {
+                        debugger;
+                        console.log("[$upload] success: " + JSON.stringify(_fileData, null, 2));
+                        // now save the file parent, and create the relationship
+                        // using the file _id
+                        var fileParent = {
+                            title: new Date() + " Saved Parent",
+                            fileObject: {
+                                _type: 'KinveyFile',
+                                _id: _fileData._id
+                            }
+                        };
+
+                        that.fileModel = _fileData;
+
+                        return $kinvey.DataStore.save('FileParent', fileParent);
+
+                    }).then(function (_data) {
+                        console.log("[fileObject] success: " + JSON.stringify(_data, null, 2));
+                    }, function error(err) {
+                        console.log('[$upload] received error: ' + JSON.stringify(err, null, 2));
+                    });
+                }, false);
+            }]);
+    </script>
+    </td>
+                    
                     <td ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'">{{btr.suma_totala}}</td>
                     
                 </tr>
@@ -221,23 +315,9 @@
         </table>
     </div>
       <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager> 
-      <!--  incercare -- de discutat!!
-      <div class="progress" has-authority="ROLE_MANAGER" ng-show="btrs.length!=0 > 
-  			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Finished</label>
-   				 <span class="sr-only" >{{btrs.length | filter:'Finished'}} Finished (success)</span>
-  			</div>
-  			<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Initiated</label>
-   				 <span class="sr-only" >{{btrs.length | filter:'Initiated'}} Initiated (warning)</span>
-  			</div>
-  			<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Waiting for approval</label>
-    			<span class="sr-only" >{{btrs.length | filter:'Waiting for approval'}} Waiting for approval (danger)</span>
-  			</div>
-		</div>
+      <!--  incercare -- de discutat!! -->
 
-		<div class="progress" has-authority="ROLE_SUPPLIER" ng-show="btrs.length!=0 > 
+		<div class="progress"  ng-show="btrs.length!=0" > 
   			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{btrs.length}}%" >
   				<label>Finished</label>
    				 <span class="sr-only" >{{btrs.length | filter:'Finished'}} Finished (success)</span>
@@ -255,7 +335,13 @@
     			<span class="sr-only" >{{btrs.length | filter:'Issuing Tickets'}} Issuing Tickets (info)</span>
   			</div>
 		</div>
-		-->
+		
 </div>
+
+
+
+
+
+
 
 

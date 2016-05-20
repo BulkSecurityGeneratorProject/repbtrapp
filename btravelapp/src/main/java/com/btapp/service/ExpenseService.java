@@ -1,6 +1,9 @@
 package com.btapp.service;
 
+import com.btapp.domain.Btr;
 import com.btapp.domain.Expense;
+import com.btapp.domain.User;
+import com.btapp.repository.BtrRepository;
 import com.btapp.repository.ExpenseRepository;
 import com.btapp.repository.search.ExpenseSearchRepository;
 import org.slf4j.Logger;
@@ -33,23 +36,26 @@ public class ExpenseService {
     @Inject
     private ExpenseSearchRepository expenseSearchRepository;
     
+    @Inject
+    private BtrRepository btrRepository;
+    
     /**
      * Save a expense.
      * @return the persisted entity
      */
     public Expense save(Expense expense) {
-        log.debug("Request to save Expense : {}", expense);
-        //if(expense.getBtr().getId() != null){ // am incercat sa fac update daca am id de btr deja
-        if(expense.getBtr().getStatus() == "Initiated"){ // am incercat sa fac update daca gasesc statusul Initiated la momentul salvarii costului
-        expense.getBtr().setStatus("Waiting for approval"); // nu merge! unde este update-ul
+    	log.debug("Request to save Expense : {}", expense);
+       // expense.getBtr();
+       // List<Expense> btr = btrRepository.findAllExpensesForBtrById(expense.getBtr().getId());
+        
+    	//Btr.this.setSuma_totala(expense.getExpense_cost());
+
+        
         Expense result = expenseRepository.save(expense);
+        
+		//Btr result = BtrRepository.save(btr);
         expenseSearchRepository.save(result);
         return result;
-        }  
-        else{
-        Expense result = expenseRepository.save(expense);
-        expenseSearchRepository.save(result);
-        return result;}
     }
 
     /**
