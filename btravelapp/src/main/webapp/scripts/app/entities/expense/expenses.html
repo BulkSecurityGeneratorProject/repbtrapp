@@ -59,14 +59,16 @@ class="hidden-xs"                        translate="btravelappApp.expense.home.c
                             <button type="submit"
                                     ui-sref="expense.edit({id:expense.id})"
                                     class="btn btn-primary btn-sm"
-                                    ng-hide="expense.btr.status!='Initiated'">
+                                    ng-hide="expense.btr.status!='Initiated'"
+                                    has-authority="ROLE_SUPPLIER">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="expense.delete({id:expense.id})"
                                     class="btn btn-danger btn-sm"
-                                    ng-hide="expense.btr.status!='Initiated'">                                    
+                                    ng-hide="expense.btr.status!='Initiated'"
+                                    has-authority="ROLE_SUPPLIER">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>

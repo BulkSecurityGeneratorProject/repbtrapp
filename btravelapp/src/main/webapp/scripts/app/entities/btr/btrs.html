@@ -308,7 +308,7 @@
     </script>
     </td>
                     
-                    <td ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'">{{btr.suma_totala}}</td>
+                    <td ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'">{{btr.suma_totala}}<span class="glyphicon glyphicon-euro input-sm" ng-show="btr.suma_totala!=null"></span></td>
                     
                 </tr>
             </tbody>

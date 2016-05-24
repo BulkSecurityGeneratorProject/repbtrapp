@@ -45,15 +45,17 @@ public class ExpenseService {
      */
     public Expense save(Expense expense) {
     	log.debug("Request to save Expense : {}", expense);
-       // expense.getBtr();
-       // List<Expense> btr = btrRepository.findAllExpensesForBtrById(expense.getBtr().getId());
-        
-    	//Btr.this.setSuma_totala(expense.getExpense_cost());
 
+    	if(expense.getBtr().getSuma_totala() == null){
+    		expense.getBtr().setSuma_totala(expense.getExpense_cost());
+    		btrRepository.save(expense.getBtr());
+    	}
+    	else{
+    		expense.getBtr().setSuma_totala(expense.getBtr().getSuma_totala() + expense.getExpense_cost());
+    		btrRepository.save(expense.getBtr());
+    	}
         
         Expense result = expenseRepository.save(expense);
-        
-		//Btr result = BtrRepository.save(btr);
         expenseSearchRepository.save(result);
         return result;
     }

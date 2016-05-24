@@ -3,7 +3,7 @@
 angular.module('btravelappApp')
     .factory('Expense', function ($resource, DateUtils) {
         return $resource('api/expenses/:id', {}, {
-            'query': { method: 'GET', isArray: true},
+            //'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
