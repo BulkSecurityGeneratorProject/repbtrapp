@@ -315,26 +315,6 @@
         </table>
     </div>
       <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager> 
-      <!--  incercare -- de discutat!! -->
-
-		<div class="progress"  ng-show="btrs.length!=0" > 
-  			<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Finished</label>
-   				 <span class="sr-only" >{{btrs.length | filter:'Finished'}} Finished (success)</span>
-  			</div>
-  			<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Initiated</label>
-   				 <span class="sr-only" >{{btrs.length | filter:'Initiated'}} Initiated (warning)</span>
-  			</div> 
-  			<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Waiting for approval</label>
-    			<span class="sr-only" >{{btrs.length | filter:'Waiting for approval'}} Waiting for approval (danger)</span>
-  			</div>
-  			<div class="progress-bar progress-bar-info progress-bar-striped" style="width: {{btrs.length}}%" >
-  				<label>Issuing Tickets</label>
-    			<span class="sr-only" >{{btrs.length | filter:'Issuing Tickets'}} Issuing Tickets (info)</span>
-  			</div>
-		</div>
 		
 </div>
 

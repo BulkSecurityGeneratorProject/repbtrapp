@@ -19,7 +19,7 @@ angular.module('btravelappApp')
         $scope.loadAll = function() {
         	$http({
         		method : 'GET',
-        		url: 'api/btrs/' + $scope.btr.id
+        		url: '/api/btrs/' + $scope.btr.id
         	}).then(function successCallback(response){
         		$scope.isSaving = true;
         		$scope.btr.expenses = response.data;
