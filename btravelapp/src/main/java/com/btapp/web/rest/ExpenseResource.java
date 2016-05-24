@@ -97,9 +97,9 @@ public class ExpenseResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Expense>> getExpense(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<Expense> getExpense(@PathVariable Long id) throws URISyntaxException { // de tipul ResponseEntity<List<Expense>>
         log.debug("REST request to get Expense : {}", id);
-        List<Expense> expense = expenseService.findOne(id);
+        Expense expense = expenseService.findOne(id); // de tipul List<Expense>
         return Optional.ofNullable(expense)
             .map(result -> new ResponseEntity<>(
                 result,

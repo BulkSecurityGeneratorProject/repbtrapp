@@ -15,8 +15,8 @@ import com.btapp.domain.Expense;
  */
 public interface ExpenseRepository extends JpaRepository<Expense,Long> {
 	
-	@Query("select e from Expense e WHERE e.btr.id= ?1")
- 	List<Expense> findOneById(Long id);
+	//@Query("select e from Expense e WHERE e.btr.id= ?1")
+ 	//List<Expense> findOneById(Long id);
 	
 	@Query("select expense from Expense expense join expense.btr btr where"
     		+ " expense.btr.status != 'Closed'"

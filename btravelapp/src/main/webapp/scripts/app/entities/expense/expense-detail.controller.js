@@ -8,7 +8,7 @@ angular.module('btravelappApp')
         		method : 'GET',
         		url: '/api/expenses/' + $scope.expense.id
         	}).then(function successCallback(response){
-                //Expense.query({id: id}, function(result) {
+                	//Expense.query({id: id}, function(result) {
                 	Expense.get({id: id}, function(result) {
                         $scope.expense = result;
                     });

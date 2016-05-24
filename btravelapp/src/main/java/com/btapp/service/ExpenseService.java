@@ -74,7 +74,7 @@ public class ExpenseService {
     /** OLD
      *  get one expense by id.
      *  @return the entity
-     
+     */
     @Transactional(readOnly = true) 
     public Expense findOne(Long id) {
         log.debug("Request to get Expense : {}", id);
@@ -82,26 +82,34 @@ public class ExpenseService {
         
         return expense;
     }
-*/
+
     /** NEW
      *  get one expense by id.
      *  @return the entity
-     */
+     
     @Transactional(readOnly = true) 
-    public List<Expense> findOne(Long id) {
+    public Expense findOne(Long id) { // de tip List<Expense>
         log.debug("Request to get Expense : {}", id);
-       // Expense expense = expenseRepository.findOne(id);
-        List<Expense> expense = expenseRepository.findOneById(id);
+        Expense expense = expenseRepository.findOne(id);
+       // List<Expense> expense = expenseRepository.findOneById(id);
         return  expense;
     }
-
+*/
     /**
      *  delete the  expense by id.
      */
     public void delete(Long id) {
         log.debug("Request to delete Expense : {}", id);
-        expenseRepository.delete(id);
+  
+        
+        Expense expense = findOne(id);
+		expense.getBtr().setSuma_totala(expense.getBtr().getSuma_totala() - expense.getExpense_cost());
+		expense.getBtr().getExpenses().remove(expense);
+		btrRepository.save(expense.getBtr());
+        
+        expenseRepository.delete(id);      
         expenseSearchRepository.delete(id);
+        
     }
 
     /**
