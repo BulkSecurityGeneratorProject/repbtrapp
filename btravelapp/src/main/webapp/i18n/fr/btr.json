@@ -46,7 +46,8 @@
             "assigned_to": "Assigné à",
             "assigned_from": "Assigné De",
             "manager": "Créé par",
-            "supplier": "Fournisseur"
+            "supplier": "Fournisseur",
+            "star":"*"
         }
     }
 }
