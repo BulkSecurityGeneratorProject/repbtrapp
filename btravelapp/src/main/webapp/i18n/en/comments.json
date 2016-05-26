@@ -6,7 +6,7 @@
                 "createLabel": "Create a new Comments",
                 "createOrEditLabel": "Create or edit a Comments",
                 "search": "Search for Comments",
-                "norow": "There is no comment for you now."
+                "norow": "There are no comments for you now."
             },
             "created": "A new Comments is created with identifier {{ param }}",
             "updated": "A Comments is updated with identifier {{ param }}",

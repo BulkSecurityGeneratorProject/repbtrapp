@@ -244,4 +244,12 @@ public class Btr implements Serializable {
             '}';
     }
 
+    /* calcul total_suma
+    public static double calcTotalExpenses(double...expenses) {
+    	   double sum = 0;
+    	   for (double value:expenses)
+    		   sum += value;
+    	   return sum;
+    	 }
+    	 */
 }

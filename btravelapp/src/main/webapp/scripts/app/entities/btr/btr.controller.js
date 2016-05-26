@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense, User) {
+    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense, User, Principal) {
 
     	//added expense
     	$scope.expenses = [];
@@ -11,14 +11,12 @@ angular.module('btravelappApp')
         $scope.reverse = true;
         $scope.page = 1;
         
-       /* console.log($scope.btr.assigned_to.idManager);
-        
-        var assignedto = function(){
-        					$scope.currentUser = Parse.User.current();
-        					//$scope.btr.assigned_to.login=result;
-        					console.log($scope.btr.assigned_to.login);
-        					}
-        	*/
+       // verific user-ul curent pentru approve/reject   
+        Principal.identity().then(function(account) {
+            $scope.account = account;
+            $scope.isAuthenticated = Principal.isAuthenticated;
+        });
+        	
 
         $scope.loadAll = function() {
             Btr.query({page: $scope.page - 1, size: 25, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {

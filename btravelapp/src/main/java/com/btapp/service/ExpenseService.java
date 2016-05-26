@@ -46,6 +46,8 @@ public class ExpenseService {
     public Expense save(Expense expense) {
     	log.debug("Request to save Expense : {}", expense);
 
+    	expense.getBtr();
+		// old way to sum the expenses
     	if(expense.getBtr().getSuma_totala() == null){
     		expense.getBtr().setSuma_totala(expense.getExpense_cost());
     		btrRepository.save(expense.getBtr());
@@ -55,6 +57,10 @@ public class ExpenseService {
     		btrRepository.save(expense.getBtr());
     	}
         
+    	//expense.getBtr().setSuma_totala(Btr.calcTotalExpenses(expense.getExpense_cost()));
+    	
+		//expense.getBtr().setSuma_totala(Btr.calcTotalExpenses(expense.getBtr().getExpenses()));
+    	
         Expense result = expenseRepository.save(expense);
         expenseSearchRepository.save(result);
         return result;

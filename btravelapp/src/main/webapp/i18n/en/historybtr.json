@@ -6,7 +6,7 @@
                 "createLabel": "Create a new Historybtr",
                 "createOrEditLabel": "Create or edit a Historybtr",
                 "search": "Search for Historybtr",
-                "norow": "There is no btr history  for you now."
+                "norow": "There are no btr history  for you now."
             },
             "created": "A new Historybtr is created with identifier {{ param }}",
             "updated": "A Historybtr is updated with identifier {{ param }}",

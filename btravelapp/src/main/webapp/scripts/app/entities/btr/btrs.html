@@ -71,7 +71,9 @@
                     <th jh-sort-by="request_date"><span translate="btravelappApp.btr.request_date">Request_date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <!--  
                     <th jh-sort-by="last_modified_date"><span translate="btravelappApp.btr.last_modified_date">Last_modified_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    -->
                     <th jh-sort-by="user.login"><span translate="btravelappApp.btr.user">user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--  
                     <th jh-sort-by="assigned_to.login"><span translate="btravelappApp.btr.assigned_to">assigned_to</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="assigned_from.login"><span translate="btravelappApp.btr.assigned_from">assigned_from</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="manager.login"><span translate="btravelappApp.btr.manager">manager</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -96,21 +98,23 @@
                     <td><a ui-sref="btr.detail({id:btr.id})">{{btr.id}}</a></td>
                     <td ng-model="status"><b>{{btr.status}}</b></td>
                      
-                    <td>{{btr.start_date | date:'medium'}}</td>
-                    <td>{{btr.end_date | date:'medium'}}</td> 
+                    <td>{{btr.start_date | date:'mediumDate'}}</td>
+                    <td>{{btr.end_date | date:'mediumDate'}}</td> 
                     <!-- 
                     <td>{{btr.location}}</td>
                     <td>{{btr.center_cost}}</td>
                     -->
-                    <td>{{btr.request_date | date:'medium'}}</td>
+                    <td>{{btr.request_date | date:'mediumDate'}}</td>
                     
                     <!-- added suma_totala field -->
                     
                     <!--  
-                    <td>{{btr.last_modified_date | date:'medium'}}</td>
+                    <td>{{btr.last_modified_date | date:'medium'}}</td>-->
+                      
                     <td>
                         {{btr.user.login}}
                     </td>
+                   <!--
                     <td>
                         {{btr.assigned_to.login}}
                     </td>
@@ -204,18 +208,18 @@
                             </button>
                         </div>
                     </td> 
-                    <td class="text-right" has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'">
+                    <td class="text-right" has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'" ng-hide="btr.assigned_to.login!=account.login">
                         <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
                         <!--  ng-disabled="isDisabled" ng-click="disableButton()"   il pusesem sa dispara butonu dupa apasare-->
                         	<button type="submit" 
                         			ui-sref="btr.approve({id:btr.id})"
                         			class="btn btn-success btn-sm"> 
-                        		<span class="glyphicon glyphicon-thumbs-up"></span><span translate="entity.action.approve">Approve</span>
+                        		<span translate="entity.action.approve">Approve</span>
                         	</button>
                         	<button type="submit" 
                         			ui-sref="btr.reject({id:btr.id})"
                         			class="btn btn-danger btn-sm" > 
-                        		<span class="glyphicon glyphicon-thumbs-down"></span><span translate="entity.action.reject">Reject</span>
+                        		<span translate="entity.action.reject">Reject</span>
                         	</button>
                         </div>
                     </td>

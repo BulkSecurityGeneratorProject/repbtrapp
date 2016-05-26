@@ -73,7 +73,7 @@ angular.module('btravelappApp')
                         iElement.find('ul').children('li')
                             .css({ 'background-color': '#DDD' })
                             .slice(0, c.idx)
-                            .css({ 'background-color': c.col });
+                            //.css({ 'background-color': c.col });
                     }
                 });
             }
