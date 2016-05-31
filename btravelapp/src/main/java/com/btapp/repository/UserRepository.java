@@ -31,7 +31,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findOneById(Long userId);
     
-    Optional<User> findAllByAuthorities(Authority authority);  // adaugat 11.03.2016
+    //Optional<User>
+    List<User> findAllByAuthorities(Authority authority);  // adaugat 11.03.2016
 
     // find all employees for a manager
     @Query("SELECT u FROM User u where u.idManager = ?#{principal.username}")

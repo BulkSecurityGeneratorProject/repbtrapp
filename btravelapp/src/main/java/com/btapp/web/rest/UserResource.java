@@ -162,23 +162,34 @@ public class UserResource {
 
     }
 
-    /**
-     * GET  /users -> get all users.
-     */
-    @RequestMapping(value = "/users",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    @Transactional(readOnly = true)
-    public ResponseEntity<List<ManagedUserDTO>> getAllUsers(Pageable pageable)
-        throws URISyntaxException {
-        Page<User> page = userRepository.findAll(pageable);
-        List<ManagedUserDTO> managedUserDTOs = page.getContent().stream()
-            .map(user -> new ManagedUserDTO(user))
-            .collect(Collectors.toList());
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
-    }
+	/**
+	 * GET /users -> get all users.
+	 */
+	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(readOnly = true)
+	public ResponseEntity<List<ManagedUserDTO>> getAllUsers(Pageable pageable) throws URISyntaxException {
+		Page<User> page = userRepository.findAll(pageable);
+		List<ManagedUserDTO> managedUserDTOs = page.getContent().stream().map(user -> new ManagedUserDTO(user))
+				.collect(Collectors.toList());
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+		return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+	}
+
+	// new
+	@RequestMapping(value = "/users/managers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(readOnly = true)
+	public ResponseEntity<List<ManagedUserDTO>> getAllManager(Pageable pageable) throws URISyntaxException {
+		Page<User> page = userRepository.findAll(pageable);
+		
+		/*Page<User> page = userRepository
+				.findAllByAuthorities(authorityRepository.findByName(AuthoritiesConstants.MANAGER));*/
+		List<ManagedUserDTO> managedUserDTOs = page.getContent().stream().filter(user -> user.getAuthorities().contains(authorityRepository.findByName(AuthoritiesConstants.MANAGER))).map(user -> new ManagedUserDTO(user))
+				.collect(Collectors.toList());
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/managers");
+		return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+	}
 
     /**
      * GET  /users/:login -> get the "login" user.
@@ -195,11 +206,11 @@ public class UserResource {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
- // modificat 18.05.2016
+ /* modificat 18.05.2016
     /**
-     * GET  /users/manager -> get the "login" user for managers
-     */
-    @RequestMapping(value = "/users/manager/{login:[_'.@a-z0-9-]+}",
+     * GET  /users/managers -> get the "login" user for managers
+     
+    @RequestMapping(value = "/users/managers", // /{login:[_'.@a-z0-9-]+},
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -210,15 +221,14 @@ public class UserResource {
                 .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    */
     
-    
-   
     
     
  // modificat 19.05.2016
     /**
      * GET  /users/supplier -> get the "login" user for supplier
-     */
+     
     @RequestMapping(value = "/users/supplier/{login:[_'.@a-z0-9-]+}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -229,7 +239,7 @@ public class UserResource {
                 .map(ManagedUserDTO::new)
                 .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    }*/
     
 // get manager's employees
     /**

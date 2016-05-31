@@ -5,6 +5,7 @@ import com.btapp.domain.Expense;
 import com.btapp.domain.User;
 import com.btapp.repository.BtrRepository;
 import com.btapp.repository.ExpenseRepository;
+import com.btapp.repository.search.BtrSearchRepository;
 import com.btapp.repository.search.ExpenseSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,10 @@ public class ExpenseService {
     @Inject
     private BtrRepository btrRepository;
     
+
+    @Inject
+    private BtrSearchRepository btrSearchRepository;
+    
     /**
      * Save a expense.
      * @return the persisted entity
@@ -46,23 +51,23 @@ public class ExpenseService {
     public Expense save(Expense expense) {
     	log.debug("Request to save Expense : {}", expense);
 
-    	expense.getBtr();
+    	//expense.getBtr();
 		// old way to sum the expenses
-    	if(expense.getBtr().getSuma_totala() == null){
+    	/*if(expense.getBtr().getSuma_totala() == null){
     		expense.getBtr().setSuma_totala(expense.getExpense_cost());
     		btrRepository.save(expense.getBtr());
     	}
     	else{
     		expense.getBtr().setSuma_totala(expense.getBtr().getSuma_totala() + expense.getExpense_cost());
     		btrRepository.save(expense.getBtr());
-    	}
+    	}*/
         
-    	//expense.getBtr().setSuma_totala(Btr.calcTotalExpenses(expense.getExpense_cost()));
-    	
-		//expense.getBtr().setSuma_totala(Btr.calcTotalExpenses(expense.getBtr().getExpenses()));
-    	
-        Expense result = expenseRepository.save(expense);
+        Expense result = expenseRepository.saveAndFlush(expense);
         expenseSearchRepository.save(result);
+        Btr btr = btrRepository.findOne(expense.getBtr().getId());
+		btr.setSuma_totala(btr.calcTotalExpenses());
+		btrRepository.save(btr);
+		btrSearchRepository.save(btr);
         return result;
     }
 
@@ -109,13 +114,15 @@ public class ExpenseService {
   
         
         Expense expense = findOne(id);
-		expense.getBtr().setSuma_totala(expense.getBtr().getSuma_totala() - expense.getExpense_cost());
-		expense.getBtr().getExpenses().remove(expense);
-		btrRepository.save(expense.getBtr());
+        Btr btr = btrRepository.findOne(expense.getBtr().getId());
+        
+        btr.setSuma_totala(btr.getSuma_totala() - expense.getExpense_cost());
+		btr.getExpenses().remove(expense);
         
         expenseRepository.delete(id);      
         expenseSearchRepository.delete(id);
-        
+
+		btrRepository.save(expense.getBtr());
     }
 
     /**

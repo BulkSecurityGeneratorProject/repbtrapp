@@ -1,14 +1,22 @@
 'use strict';
 
 angular.module('btravelappApp').controller('UserManagementDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'User', 'Language',
-        function($scope, $stateParams, $uibModalInstance, entity, User, Language) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'User', 'Language', 'Auth',
+        function($scope, $stateParams, $uibModalInstance, entity, User, Language, Auth) {
 
     	//added 18.05.2016
     	//$scope.managers = managers.query();
     	
     	$scope.users = User.query(); //adaugat 11.03.2016
         $scope.user = entity;
+        $scope.manager = entity;
+        // managers login
+        Auth.getAllManagers().then(function(response){
+            $scope.managers = response;
+        });
+        
+        $scope.managers = User.query();
+        
         $scope.authorities = ["ROLE_USER", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPPLIER"]; //MODIFICAT 08.03.2016
         Language.getAll().then(function (languages) {
             $scope.languages = languages;
@@ -27,7 +35,11 @@ angular.module('btravelappApp').controller('UserManagementDialogController',
             if ($scope.user.id != null) {
                 User.update($scope.user, onSaveSuccess, onSaveError);
             } else {
-                User.save($scope.user, onSaveSuccess, onSaveError);
+            	if ( $scope.manager.id != null ){
+                 User.save($scope.user, onSaveSuccess, onSaveError);
+            	} else {
+            		User.save($scope.manager, onSaveSuccess, onSaveError);
+            	}
             }
         };
 
@@ -35,24 +47,7 @@ angular.module('btravelappApp').controller('UserManagementDialogController',
             $uibModalInstance.dismiss('cancel');
         };
         
-     // managers login
-        $scope.managers = function() {
-        $http({
-			method : 'GET',
-			url : '/api/users'
-		}).then(function successCallback(response) {
-			$scope.isSaving = true;
-
-				$scope.user.id_manager = $scope.user.id_manager;
-
-			User.update($scope.user, onSaveSuccess, onSaveError);
-		}, function errorCallback(response) {
-			
-				$scope.user.id_manager = $scope.user.id_manager;
-				
-			User.update($scope.user, onSaveSuccess, onSaveError);
-		})
-        };
+        
         // validare mail
         var app = angular.module('btravelappApp', []);
         app.directive('myDirective', function() {
@@ -72,5 +67,6 @@ angular.module('btravelappApp').controller('UserManagementDialogController',
             };
         });
         
+       
         
 }]);

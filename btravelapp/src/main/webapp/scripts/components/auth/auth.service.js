@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    .factory('Auth', function Auth($rootScope, $state, $q, $translate, $http, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
         return {
             login: function (credentials, callback) {
                 var cb = callback || angular.noop;
@@ -127,6 +127,13 @@ angular.module('btravelappApp')
                 }, function (err) {
                     return cb(err);
                 }).$promise;
+            },
+            
+            // managers
+            getAllManagers : function(){
+                return $http.get('api/users/managers').then(function(response) {
+                    return response.data;
+                });
             }
         };
     });

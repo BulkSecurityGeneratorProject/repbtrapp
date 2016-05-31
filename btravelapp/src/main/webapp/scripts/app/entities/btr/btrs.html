@@ -83,11 +83,11 @@
                     -->
                     
                     <!-- added suma_totala field -->
+                    <th jh-sort-by="suma_totala"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
                     
                     <th><span><center>Business Travel Request Management</center></span></th>
                     <th has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'"><span><center>Business Travel Request Approval</center></span></th>
-                    <th has-authority="ROLE_SUPPLIER" ng-show="btr.status=='Issuing ticket'"><span><center>Attachment</center></span></th>
-                    <th jh-sort-by="suma_totala" ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-authority="ROLE_SUPPLIER" ng-show="btr.status=='Issuing ticket'"><span><center>Attachment</center></span></th>              
                     
                     <th></th>
                 </tr>
@@ -152,8 +152,12 @@
                                 </span>
                             </button>
                        	</div>
-                    </td>    
+                    </td>                   
                     -->
+                    <td>
+                    <span class="form-control-static" ng-show="btr.suma_totala == null">0<span class="glyphicon glyphicon-euro input-sm"></span></span>
+                    {{btr.suma_totala}}
+                    <span class="glyphicon glyphicon-euro input-sm" ng-show="btr.suma_totala!=null"></span></td>
                     <td class="text-right"> 
                         <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
                             <button type="submit"
@@ -310,10 +314,7 @@
                 }, false);
             }]);
     </script>
-    </td>
-                    
-                    <td ng-show="btr.status=='Waiting for approval' || btr.status=='Finished'">{{btr.suma_totala}}<span class="glyphicon glyphicon-euro input-sm" ng-show="btr.suma_totala!=null"></span></td>
-                    
+    </td>               
                 </tr>
             </tbody>
         </table>

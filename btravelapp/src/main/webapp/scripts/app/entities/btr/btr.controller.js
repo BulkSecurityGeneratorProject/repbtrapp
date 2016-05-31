@@ -77,23 +77,5 @@ angular.module('btravelappApp')
                         'Waiting for approval',
                         'Issuing Tickets'
                     ];
-        
-       /* $scope.isDisabled = false;
-
-        $scope.disableButton = function() {
-            $scope.isDisabled = true;
-        }*/
-        
-        //$scope.currentUser = function () {
-        //    return User.get();
-        //}
-        
-        //$scope.isAssignedTo = function(login){
-        //	if($scope.btr.assigned_to == login)
-        //		return true;
-        //	else
-        //		return false;
-       // }
-
     });
 

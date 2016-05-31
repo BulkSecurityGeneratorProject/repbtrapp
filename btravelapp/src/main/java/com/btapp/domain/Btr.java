@@ -1,17 +1,29 @@
 package com.btapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Btr.
@@ -243,13 +255,16 @@ public class Btr implements Serializable {
             ", expensesNO='" + expenses.size() + "'" +
             '}';
     }
-
-    /* calcul total_suma
-    public static double calcTotalExpenses(double...expenses) {
-    	   double sum = 0;
-    	   for (double value:expenses)
-    		   sum += value;
+  
+     //calcul total_suma
+    public double calcTotalExpenses() {
+    	   double sum = 0;System.out.println("EXPSSSSSTOTAL" + expenses.size());
+    	   for (Expense e:expenses) {
+			Double expense_cost = e.getExpense_cost();
+			System.out.println("EXPSSSSS" + expense_cost);
+			sum += expense_cost;
+		}
     	   return sum;
     	 }
-    	 */
+      
 }

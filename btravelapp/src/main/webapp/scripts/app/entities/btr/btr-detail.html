@@ -72,6 +72,7 @@
             		<span translate="btravelappApp.btr.suma_totala">Suma Totala</span>
         		</td>
         		<td>
+        			<span class="form-control-static" ng-show="btr.suma_totala == null">0<span class="glyphicon glyphicon-euro input-sm"></span></span>
             		<span class="form-control-static">{{btr.suma_totala}}<span class="glyphicon glyphicon-euro input-sm" ng-show="btr.suma_totala!=null"></span></span>
         		</td>
             </tr>

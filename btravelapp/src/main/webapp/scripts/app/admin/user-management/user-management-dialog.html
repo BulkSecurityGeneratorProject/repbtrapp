@@ -81,10 +81,15 @@
         </div>
         
         <div class="form-group" > 							<!-- modificat 11.03.2016  -->
-        	<label translate="user-management.idManager" for="field_in_manager">ID Manager</label>
-             <!-- <input type="text" class="form-control" name="idManager" ng-model="user.idManager"> ng-hide="::filter.idManager != null" -->
+        	<label translate="user-management.idManager" for="field_in_manager">Manager</label>
+             <!-- <input type="text" class="form-control" name="idManager" ng-model="user.idManager"> ng-hide="::filter.idManager != null" 
             <select  class="form-control" name="user" id="field_in_manager" ng-model="user.idManager" 
              	ng-options="user.idManager as user.idManager for user in users">
+        			<option value=""></option>
+     		</select>
+     		-->
+     		<select  class="form-control" id="field_in_manager" ng-model="manager" 
+             	ng-options="manager.login for manager in managers">
         			<option value=""></option>
      		</select>
         </div>
