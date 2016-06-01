@@ -105,7 +105,8 @@ public class UserService {
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setLangKey(langKey);
-        newUser.setLangKey(idManager);
+        //newUser.setLangKey(idManager);
+        newUser.setIdManager(idManager); // modificat 01.06
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
@@ -237,28 +238,4 @@ public class UserService {
         }
     }
     
-    /* get the login of all managers       prima incercare: findManagers();
-    @Transactional(readOnly = true)
-    public Optional<User> findManagers() {
-        Optional<User> user = userRepository.findAllByAuthorities(null);
-        //user.getAuthorities().size(); // eagerly load the association
-        return user;
-    }
-    
-    // get the login of all managers       prima incercare: findManagers();
-    @Transactional(readOnly = true)
-    public Optional<User> findManagers() {
-        Optional<User> user = userRepository.findAllByAuthorities(null);
-        //user.getAuthorities().size(); // eagerly load the association
-        return user;
-    }
-    */
-    
-    // get all manager's employees      
-    @Transactional(readOnly = true)
-    public Optional<User> findEmployees() {
-        Optional<User> user = userRepository.findAllEmployeesForManager(SecurityUtils.getCurrentUser().getUsername());
-        //user.getAuthorities().size(); // eagerly load the association
-        return user;
-    }
 }

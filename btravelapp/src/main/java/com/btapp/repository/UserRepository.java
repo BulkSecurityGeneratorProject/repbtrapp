@@ -36,9 +36,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // find all employees for a manager
     @Query("SELECT u FROM User u where u.idManager = ?#{principal.username}")
-    Optional<User> findAllEmployeesForManager(String idManager);
+    Page<User> findAllEmployeesForManager(Pageable pageable);
     
     @Override
     void delete(User t);
+
+	//Page<User> findEmployees(Pageable pageable);
 
 }

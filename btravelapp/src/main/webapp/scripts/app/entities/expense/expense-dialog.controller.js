@@ -1,12 +1,19 @@
 'use strict';
 
 angular.module('btravelappApp').controller('ExpenseDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Expense', 'Btr', 'Expense_type',
-        function($scope, $stateParams, $uibModalInstance, entity, Expense, Btr, Expense_type) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Expense', 'Btr', 'Expense_type', 'BtrInitiated',
+        function($scope, $stateParams, $uibModalInstance, entity, Expense, Btr, Expense_type, BtrInitiated) {
 
         $scope.expense = entity;
         $scope.btrs = Btr.query();
         $scope.expense_types = Expense_type.query();
+        
+        $scope.initiat = Btr.query();
+        
+        BtrInitiated.getAllInitiatedBtrs().then(function(response){
+            $scope.initiated = response;
+        });
+        
         $scope.load = function(id) {
             Expense.get({id : id}, function(result) {
                 $scope.expense = result;

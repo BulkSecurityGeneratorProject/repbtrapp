@@ -88,6 +88,21 @@ public class BtrResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/btrs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /btrs -> get all the btrs in status "Initiated".
+     */
+    @RequestMapping(value = "/btrs/initiated",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Btr>> getAllInitiatedBtrs(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Btrs");
+        Page<Btr> page = btrService.findAllBtrInitiated(pageable); // findAll btrs with status "Initiated"
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/btrs/initiated");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /btr/:id -> get the "id" btr.

@@ -47,7 +47,9 @@
             "assigned_from": "Assigné De",
             "manager": "Créé par",
             "supplier": "Fournisseur",
-            "star":"*"
+            "star":"*",
+            "message_supplier1":"Sélection Initié vous pouvez assigner la demande à l'un des autres fournisseurs.",
+            "message_supplier2":"Sélection d'attente pour approbation vous confirmez le fait que toutes les dépenses nécessaires sont créées pour la demande et d'attribuer de nouveau à être approuvé."
         }
     }
 }

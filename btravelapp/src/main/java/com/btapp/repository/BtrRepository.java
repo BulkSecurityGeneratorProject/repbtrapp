@@ -38,7 +38,7 @@ public interface BtrRepository extends JpaRepository<Btr,Long> {
     		+ " or btr.supplier.login = ?#{principal.username} )")
     Page<Btr> finByAssigned_toOrEmployeeIsCurrentUser(Pageable pageable);
 
-   // @Query("select e from btr.expenses e where e.btr.id= ?1")
-   // List<Expense> findAllExpensesForBtrById(Long id);
+    @Query("select btr from Btr btr where btr.status = 'Initiated' ")
+    Page<Btr> findAllBtrInitiated(Pageable pageable);
 
 }

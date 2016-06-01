@@ -134,6 +134,18 @@ angular.module('btravelappApp')
                 return $http.get('api/users/managers').then(function(response) {
                     return response.data;
                 });
+            },
+         // suppliers
+            getAllSuppliers : function(){
+                return $http.get('api/users/suppliers').then(function(response) {
+                    return response.data;
+                });
+            },
+         // employees
+            getAllEmployeesByManager : function(){
+                return $http.get('api/users/employees').then(function(response) {
+                    return response.data;
+                });
             }
         };
     });

@@ -19,3 +19,15 @@ angular.module('btravelappApp')
             'update': { method:'PUT' }
         });
     });
+angular.module('btravelappApp')
+	.factory('BtrInitiated', function($http){
+		return  {
+    	// btr "initiated"
+    	getAllInitiatedBtrs : function(){
+    	    return $http.get('api/btrs/initiated').then(function(response) {
+    	        return response.data;
+    	    });
+    	 }
+		};
+	})
+

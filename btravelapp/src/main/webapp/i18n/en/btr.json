@@ -47,7 +47,9 @@
             "assigned_from": "Assigned From",
             "manager": "Created by",
             "supplier": "Supplier",
-            "star":"*"
+            "star":"*",
+            "message_supplier1":"Selecting Initiated you can assign the request to one of the other suppliers.",
+            "message_supplier2":"Selecting Waiting for approval you confirm the fact that all the expenses needed are created for the request and assign it back to be approved."
         }
     }
 }

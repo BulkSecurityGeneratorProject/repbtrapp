@@ -204,47 +204,39 @@ public class UserResource {
                 .map(ManagedUserDTO::new)
                 .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    }   
     
- /* modificat 18.05.2016
-    /**
-     * GET  /users/managers -> get the "login" user for managers
-     
-    @RequestMapping(value = "/users/managers", // /{login:[_'.@a-z0-9-]+},
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<ManagedUserDTO> getIdManager() {
-    	//findManagers()
-        return userRepository.findAllByAuthorities(authorityRepository.findByName(AuthoritiesConstants.MANAGER))
-                .map(ManagedUserDTO::new)
-                .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-    */
-    
-    
-    
- // modificat 19.05.2016
-    /**
-     * GET  /users/supplier -> get the "login" user for supplier
-     
-    @RequestMapping(value = "/users/supplier/{login:[_'.@a-z0-9-]+}",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<ManagedUserDTO> getIdSupplier() {
-    	
-        return userRepository.findAllByAuthorities(authorityRepository.findByName(AuthoritiesConstants.SUPPLIER))
-                .map(ManagedUserDTO::new)
-                .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }*/
+    // suppliers
+    @RequestMapping(value = "/users/suppliers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(readOnly = true)
+	public ResponseEntity<List<ManagedUserDTO>> getAllSuppliers(Pageable pageable) throws URISyntaxException {
+		Page<User> page = userRepository.findAll(pageable);
+		
+		/*Page<User> page = userRepository
+				.findAllByAuthorities(authorityRepository.findByName(AuthoritiesConstants.MANAGER));*/
+		List<ManagedUserDTO> managedUserDTOs = page.getContent().stream().filter(user -> user.getAuthorities().contains(authorityRepository.findByName(AuthoritiesConstants.SUPPLIER))).map(user -> new ManagedUserDTO(user))
+				.collect(Collectors.toList());
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/suppliers");
+		return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+	}
     
 // get manager's employees
+    
+    @RequestMapping(value = "/users/employees", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(readOnly = true)
+	public ResponseEntity<List<ManagedUserDTO>> getAllEmployeesByManager(Pageable pageable) throws URISyntaxException {
+		Page<User> page = userRepository.findAllEmployeesForManager(pageable);
+		List<ManagedUserDTO> managedUserDTOs = page.getContent().stream().map(user -> new ManagedUserDTO(user))
+				.collect(Collectors.toList());
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/employees");
+		return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+	}
+    
     /**
      * GET  /users/:login -> get the "login" manager user.
-     */
+     
     @RequestMapping(value = "/users/employees/{login:[_'.@a-z0-9-]+}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -256,7 +248,7 @@ public class UserResource {
                 .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+    */
     /**
      * DELETE  USER :login -> delete the "login" User.
      */

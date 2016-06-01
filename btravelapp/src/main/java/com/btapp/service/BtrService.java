@@ -3,9 +3,12 @@ package com.btapp.service;
 import com.btapp.domain.Btr;
 import com.btapp.domain.Historybtr;
 import com.btapp.domain.User;
+import com.btapp.repository.AuthorityRepository;
 import com.btapp.repository.BtrRepository;
 import com.btapp.repository.UserRepository;
 import com.btapp.repository.search.BtrSearchRepository;
+import com.btapp.security.AuthoritiesConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,6 +43,8 @@ public class BtrService {
     @Inject
     private BtrSearchRepository btrSearchRepository;
     
+    @Inject
+    private AuthorityRepository authorityRepository;
    // @Inject
    // private Historybtr historybtr;
     
@@ -58,20 +63,16 @@ public class BtrService {
         
         if(btr.getStatus() == null){
         	btr.setStatus("Initiated"); 
-        	// history line added;
-        	//historybtr.setBtrstatusbefore("N/A");
-        	//historybtr.setBtrstatusafter("Initiated");
         }
         else
 	        if(btr.getStatus() == "Initiated"){
 	        	btr.setStatus("Waiting for approval");
-        		//historybtr.setBtrstatusbefore("Initiated");
-        		//historybtr.setBtrstatusafter("Waiting for approval");
 	        }
+	        
         if(btr.getId() == null)
         {
 	        btr.setAssigned_from((User)user.get());
-	        
+	        //btr.setAssigned_to(btr.getAssigned_to());
 	        btr.setSupplier(btr.getAssigned_to()); // ma intereseaza supplier-ul curent care se ocupa de btr 
 	        btr.setManager((User)user.get());
 	        btr.setRequest_date(ZonedDateTime.now());
@@ -81,9 +82,6 @@ public class BtrService {
         }
         else
         {
-        	//if(btr.getStatus() == "Waiting for approval"){
-        	//	btr.setAssigned_from(btr.getSupplier());
-        	//}
         	btr.setAssigned_from((User)user.get());
 	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
         }
@@ -130,6 +128,17 @@ public class BtrService {
     public Page<Btr> findAll(Pageable pageable) {
         log.debug("Request to get all Btrs");
         Page<Btr> result = btrRepository.finByAssigned_toOrEmployeeIsCurrentUser(pageable); 
+        return result;
+    }
+    
+    /** NEW
+     *  get all the btrs in status "Initiated".
+     *  @return the list of entities
+    */
+    @Transactional(readOnly = true) 
+    public Page<Btr> findAllBtrInitiated(Pageable pageable) {
+        log.debug("Request to get all Btrs");
+        Page<Btr> result = btrRepository.findAllBtrInitiated(pageable); 
         return result;
     }
 

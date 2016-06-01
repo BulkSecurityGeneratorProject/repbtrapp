@@ -1,14 +1,27 @@
 'use strict';
 
 angular.module('btravelappApp').controller('BtrDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Btr', 'User', 'Expense',
-        function($scope, $stateParams, $uibModalInstance, entity, Btr, User, Expense) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Btr', 'User', 'Expense', 'Auth',
+        function($scope, $stateParams, $uibModalInstance, entity, Btr, User, Expense, Auth) {
 
-    	//$scope.authorities = ["ROLE_MANAGER", "ROLE_SUPPLIER"]; // adaugat 31.03.2016
         $scope.btr = entity;
         $scope.users = User.query();
         $scope.user = entity;
         $scope.expenses = Expense.query();
+        
+        $scope.supplier = entity;
+        $scope.employee = entity;
+        
+        // suppliers
+        Auth.getAllSuppliers().then(function(response){
+        	$scope.suppliers = response;
+        });
+        
+        // manager's employees
+        Auth.getAllEmployeesByManager().then(function(response){
+        	$scope.employees = response;
+        });
+        
         $scope.load = function(id) {
             Btr.get({id : id}, function(result) {
                 $scope.btr = result;
@@ -72,31 +85,5 @@ angular.module('btravelappApp').controller('BtrDialogController',
 
         $scope.datePickerForLast_modified_dateOpen = function($event) {
             $scope.datePickerForLast_modified_date.status.opened = true;
-        };
-        
-        // supplier list   
-        $scope.suppliers = function() {
-        	$http({
-        		method : 'GET',
-        		url: 'api/users/supplier/' + $scope.user.id
-        	}).then(function successCallback(response){
-        		$scope.isSaving = true;
-        		$scope.btr.assigned_to = response.data;        		
-        	}, function errorCallback(response){
-        		
-        	});
-        };
-        
-        // manager's employees
-        $scope.employees = function() {
-        	$http({
-        		method : 'GET',
-        		url: 'api/users/employees/' + $scope.btr.user.id
-        	}).then(function successCallback(response){
-        		$scope.isSaving = true;
-        		$scope.btr.user = response.data;        		
-        	}, function errorCallback(response){
-        		
-        	});
         };
 }]);
