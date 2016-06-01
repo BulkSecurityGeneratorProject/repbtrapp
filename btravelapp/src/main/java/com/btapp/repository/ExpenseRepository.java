@@ -29,4 +29,16 @@ public interface ExpenseRepository extends JpaRepository<Expense,Long> {
     		+ " or expense.btr.supplier.login = ?#{principal.username} "
     		+ ")")
     Page<Expense> finByBtrExpenssesIsCurrentUser(Pageable pageable);
+	
+	@Query("select expense from Expense expense join expense.btr btr where"
+    		+ " expense.btr.status != 'Closed'"
+    		+ " and "
+    		+ "("
+    		+ " expense.btr.assigned_to.login = ?#{principal.username}"
+    		+ " or expense.btr.user.login = ?#{principal.username}"
+    		+ " or expense.btr.assigned_from.login = ?#{principal.username}"
+    		+ " or expense.btr.manager.login = ?#{principal.username}"
+    		+ " or expense.btr.supplier.login = ?#{principal.username} "
+    		+ ")")
+    Page<Expense> finByBtrExpenssesIsCurrentUserByBtrId(Pageable pageable);
 }

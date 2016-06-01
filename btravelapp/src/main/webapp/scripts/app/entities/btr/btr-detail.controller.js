@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .controller('BtrDetailController', function ($scope, $rootScope, $stateParams, $http, entity, Btr, User, Expense) {
-        $scope.expense = entity;
+    .controller('BtrDetailController', function ($scope, $rootScope, $stateParams, $http, entity, Btr, User, Expense, ExpenseBtr) {
+        //$scope.expense = Expense.query();
     	$scope.btr = entity;
+    	$scope.expense = Expense.query();
     	//console.log($scope.btr.expenses.length);
         $scope.load = function (id) {
             Btr.get({id: id}, function(result) {
@@ -35,5 +36,8 @@ angular.module('btravelappApp')
             $scope.clear();
         };
 
+        ExpenseBtr.getAllExpensesByBtrId($scope.btr.id).then(function(response){
+        	$scope.expensesbybtr = response;
+        });
     });
 

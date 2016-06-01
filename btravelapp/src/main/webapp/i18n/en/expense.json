@@ -2,7 +2,7 @@
     "btravelappApp": {
         "expense" : {
             "home": {
-                "title": "Expenses",
+                "title": "Business Travel Request Expenses",
                 "createLabel": "Create a new Expense",
                 "createOrEditLabel": "Create or edit a Expense",
                 "search": "Search for Expense",
@@ -18,7 +18,7 @@
                 "title": "Expense"
             },
             "expense_cost": "Expense Cost(Euro)",
-            "btr": "BTR",
+            "btr": "Business Travel Request",
             "expense_type": "Expense Type"
         }
     }

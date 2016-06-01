@@ -122,35 +122,42 @@
     </div>
     
     
-	<h2 ng-show="expenses.length!=0" translate="global.field.newcost"></h2>
+	<h2 ng-show="expensesbybtr.length!=0" translate="global.field.newcost"></h2>
 	<div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="expenses.length!=0">
-                <p ng-hide="expenses.length!=0" translate="global.field.norow"></p>
-                    <th jh-sort-by="expense.id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="expense.expense_cost"><span translate="global.field.expense_cost">Expense_cost</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="expense.expense_type.type"><span translate="global.field.expense_type">expense_type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+		<table class="jh-table table table-striped">
+			<thead>
+				<tr jh-sort="predicate" ascending="reverse" callback="loadAll()"
+					ng-show="expensesbybtr.length!=0">
+					<p ng-hide="expensesbybtr.length!=0" translate="global.field.norow"></p>
+					<th jh-sort-by="expense.id"><span translate="global.field.id">ID</span>
+						<span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="expense.expense_cost"><span
+						translate="global.field.expense_cost">Expense_cost</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="expense.expense_type.type"><span
+						translate="global.field.expense_type">expense_type</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
 
-    <h2><span >Btr</span> {{btr.expenses[0].id}}</h2>
-                <!--  <tr ng-repeat="expense in expenses track by expense.btr.id"> -->
-                <tr ng-repeat="expense in btr.expenses">
-                    <td>
-                    	<a ui-sref="expense.detail({id:expense.id})">{{btr.expense.id}}</a>
-                    </td>
-                    <td>{{btr.expense.expense_cost}}</td>
-                    <td>
-                        <a ui-sref="expense_type.detail({id:expense.expense_type.id})">{{btr.expense.expense_type.type}}</a>
-                    </td>          
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <button type="submit"
+				<h2>
+					<span>Btr</span>
+				</h2>
+				<!--  <tr ng-repeat="expense in expenses track by expense.btr.id"> -->
+				<tr ng-repeat="expense in expensesbybtr">
+					<td><a ui-sref="expense.detail({id:expense.id})">{{expense.id}}</a>
+					</td>
+					<td>{{expense.expense_cost}}</td>
+					<td><a
+						ui-sref="expense_type.detail({id:expense.expense_type.id})">{{expense.expense_type.type}}</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>

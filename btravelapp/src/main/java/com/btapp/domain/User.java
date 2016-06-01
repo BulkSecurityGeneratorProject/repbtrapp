@@ -88,7 +88,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
 
-    //@NotNull									//
+    //@NotNull	
+    @JsonIgnore
     @Column(name = "id_manager") // adaugate 08.03.2016
     private String idManager;					//
     

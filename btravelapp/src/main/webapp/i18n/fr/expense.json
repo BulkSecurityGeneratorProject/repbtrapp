@@ -2,7 +2,7 @@
     "btravelappApp": {
         "expense" : {
             "home": {
-                "title": "Expenses",
+                "title": "Voyage d'affaires Demander Dépenses",
                 "createLabel": "Créer un nouveau Expense",
                 "createOrEditLabel": "Créer ou éditer un Expense",
                 "search": "Rechercher des dépenses",
@@ -18,7 +18,7 @@
                 "title": "Expense"
             },
             "expense_cost": "Frais Coût(Euro)",
-            "btr": "BTR",
+            "btr": "Demande Voyage d'affaires",
             "expense_type": "Type de dépense"
         }
     }

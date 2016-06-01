@@ -88,10 +88,14 @@
         			<option value=""></option>
      		</select>
      		-->
-     		<select  class="form-control" id="field_in_manager" ng-model="manager" 
+     		
+     		<select  class="form-control" id="field_idManager" ng-model="user.idManager" 
              	ng-options="manager.login for manager in managers">
         			<option value=""></option>
      		</select>
+     		 <select class="form-control " id="field_assigned_to" ng-model="btr.assigned_to" ng-options="supplier.login for supplier in suppliers">
+                <option value=""></option>
+            </select>
         </div>
         <!--  
         <div class="form-group">

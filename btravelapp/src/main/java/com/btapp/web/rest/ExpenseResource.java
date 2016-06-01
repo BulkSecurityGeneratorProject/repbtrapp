@@ -89,6 +89,29 @@ public class ExpenseResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+  
+    /**
+     * GET  /expenses -> get all the expenses by btr.
+     */
+    @RequestMapping(value = "/expensesbtr/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<Expense>> getAllExpensesByBtrId(@PathVariable Long id)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Expenses by Btr");
+        
+		List<Expense> expenses = (List<Expense>) expenseService.findAllByBtrId(id); 
+        return Optional.ofNullable(expenses)
+                .map(result -> new ResponseEntity<>(
+                    result,
+                    HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        /*
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/expensesbtr");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    */}
+    
     /**
      * GET  /expenses/:id -> get the "id" expense.
      * @throws URISyntaxException 

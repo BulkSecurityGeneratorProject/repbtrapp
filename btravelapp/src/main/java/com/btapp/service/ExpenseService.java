@@ -7,6 +7,9 @@ import com.btapp.repository.BtrRepository;
 import com.btapp.repository.ExpenseRepository;
 import com.btapp.repository.search.BtrSearchRepository;
 import com.btapp.repository.search.ExpenseSearchRepository;
+
+import akka.util.Collections;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -82,7 +85,18 @@ public class ExpenseService {
         return result;
     }
     
-    /** OLD
+    /**
+     *  get all the expenses by btr id.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<Expense> findAllByBtrId(Long id) {
+        log.debug("Request to get all Expenses by Btr");
+        List<Expense> result = (List<Expense>) expenseRepository.findAll().stream().filter(expense -> id.equals(expense.getBtr().getId())).collect(Collectors.toList()); //findAll
+        return result;
+    }
+    
+    /** 
      *  get one expense by id.
      *  @return the entity
      */
@@ -94,18 +108,6 @@ public class ExpenseService {
         return expense;
     }
 
-    /** NEW
-     *  get one expense by id.
-     *  @return the entity
-     
-    @Transactional(readOnly = true) 
-    public Expense findOne(Long id) { // de tip List<Expense>
-        log.debug("Request to get Expense : {}", id);
-        Expense expense = expenseRepository.findOne(id);
-       // List<Expense> expense = expenseRepository.findOneById(id);
-        return  expense;
-    }
-*/
     /**
      *  delete the  expense by id.
      */
@@ -138,15 +140,5 @@ public class ExpenseService {
             .collect(Collectors.toList());
     }
     
-    /** INCERCARE
-     *  get expenses by btr id.
-     *  @return the entity
-      
-    public Expense findOneById(Long id) {
-        //log.debug("Request to get Expense for a btr : {}", id);
-        Expense expense = (Expense) expenseRepository.findOneById();
-        return expense;
-    }
-  */
 
 }

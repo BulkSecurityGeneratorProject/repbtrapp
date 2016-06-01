@@ -14,3 +14,13 @@ angular.module('btravelappApp')
             'update': { method:'PUT' }
         });
     });
+angular.module('btravelappApp')
+	.factory('ExpenseBtr', function($http){
+		return {
+			getAllExpensesByBtrId : function(id){
+	    	    return $http.get('api/expensesbtr/'+id).then(function(response) {
+	    	        return response.data;
+	    	    });
+	    	 }
+		}
+	});

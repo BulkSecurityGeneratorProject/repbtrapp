@@ -55,57 +55,57 @@ public class BtrService {
      * Save a btr.
      * @return the persisted entity
      */
-    public Btr save(Btr btr) {
-        log.debug("Request to save Btr : {}", btr);
-        
-        btr.getUser();
-        Optional<User> user = userRepository.findOneByLogin(User.getCurrentUser());
-        
-        if(btr.getStatus() == null){
-        	btr.setStatus("Initiated"); 
-        }
-        else
-	        if(btr.getStatus() == "Initiated"){
-	        	btr.setStatus("Waiting for approval");
-	        }
-	        
-        if(btr.getId() == null)
-        {
-	        btr.setAssigned_from((User)user.get());
-	        //btr.setAssigned_to(btr.getAssigned_to());
-	        btr.setSupplier(btr.getAssigned_to()); // ma intereseaza supplier-ul curent care se ocupa de btr 
-	        btr.setManager((User)user.get());
-	        btr.setRequest_date(ZonedDateTime.now());
-	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
-	        btr.setSuma_totala(null);
-	        
-        }
-        else
-        {
-        	btr.setAssigned_from((User)user.get());
-	        btr.setLast_modified_date(ZonedDateTime.now()); // modificat 25.03.2016
-        }
-        
-        //history line added
-        //historybtr.setAssigned_from(btr.getAssigned_from().getLogin());
-        //historybtr.setAssigned_to(btr.getAssigned_to().getLogin());
-        //historybtr.setBtr(btr);
-//        historybtr.setCenter_cost(btr.getCenter_cost());
-//        historybtr.setChange_date(btr.getLast_modified_date());
-//        historybtr.setChanged_by(btr.getAssigned_from().getLogin());
-//        historybtr.setEnd_date(btr.getEnd_date());
-//        historybtr.setLast_modified_date(btr.getLast_modified_date());
-//        historybtr.setLocation(btr.getLocation());
-//        historybtr.setRequest_date(btr.getRequest_date());
-//        historybtr.setStart_date(btr.getStart_date());
-//        
-//        historybtrRepository.save(historybtr);
-        
-        Btr result = btrRepository.save(btr);
-        btrSearchRepository.save(result);
-        return result;
-       
-    }
+	public Btr save(Btr btr) {
+		log.debug("Request to save Btr : {}", btr);
+
+		btr.getUser();
+		Optional<User> user = userRepository.findOneByLogin(User.getCurrentUser());
+
+		if (btr.getStatus() == null) {
+			btr.setStatus("Initiated");
+		} else if (btr.getStatus().equals("Initiated")) {
+			btr.setStatus("Waiting for approval");
+		} else if (btr.getStatus().equals("Waiting for approval"))
+			btr.setAssigned_to(btr.getManager());
+
+		if (btr.getId() == null) {
+			btr.setAssigned_from((User) user.get());
+			// btr.setAssigned_to(btr.getAssigned_to());
+			btr.setSupplier(btr.getAssigned_to()); // ma intereseaza supplier-ul
+													// curent care se ocupa de
+													// btr
+			btr.setManager((User) user.get());
+			btr.setRequest_date(ZonedDateTime.now());
+			btr.setLast_modified_date(ZonedDateTime.now()); // modificat
+															// 25.03.2016
+			btr.setSuma_totala(null);
+
+		} else {
+			btr.setAssigned_from((User) user.get());
+			btr.setLast_modified_date(ZonedDateTime.now()); // modificat
+															// 25.03.2016
+		}
+
+		// history line added
+		// historybtr.setAssigned_from(btr.getAssigned_from().getLogin());
+		// historybtr.setAssigned_to(btr.getAssigned_to().getLogin());
+		// historybtr.setBtr(btr);
+		// historybtr.setCenter_cost(btr.getCenter_cost());
+		// historybtr.setChange_date(btr.getLast_modified_date());
+		// historybtr.setChanged_by(btr.getAssigned_from().getLogin());
+		// historybtr.setEnd_date(btr.getEnd_date());
+		// historybtr.setLast_modified_date(btr.getLast_modified_date());
+		// historybtr.setLocation(btr.getLocation());
+		// historybtr.setRequest_date(btr.getRequest_date());
+		// historybtr.setStart_date(btr.getStart_date());
+		//
+		// historybtrRepository.save(historybtr);
+
+		Btr result = btrRepository.save(btr);
+		btrSearchRepository.save(result);
+		return result;
+
+	}
 
 
 	/** OLD
