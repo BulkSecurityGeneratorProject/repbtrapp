@@ -19,16 +19,10 @@ angular.module('btravelappApp')
         	
 
         $scope.loadAll = function() {
-            Btr.query({page: $scope.page - 1, size: 25, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Btr.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.totalItems = headers('X-Total-Count');
                 $scope.btrs = result;
-            });
-            //added expense
-            Expense.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                $scope.totalItems = headers('X-Total-Count');
-                $scope.expenses = result;
             });
         };
         $scope.loadPage = function(page) {
@@ -71,11 +65,5 @@ angular.module('btravelappApp')
             
         };
       
-        $scope.statusuri = [
-                        'Initiated',
-                        'Finished',
-                        'Waiting for approval',
-                        'Issuing Tickets'
-                    ];
     });
 

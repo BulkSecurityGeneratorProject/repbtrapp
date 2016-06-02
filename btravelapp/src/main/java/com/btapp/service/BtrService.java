@@ -32,43 +32,47 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @Transactional
 public class BtrService {
 
-    private final Logger log = LoggerFactory.getLogger(BtrService.class);
-    
-    @Inject
-    private UserRepository userRepository;
-    
-    @Inject
-    private BtrRepository btrRepository;
-    
-    @Inject
-    private BtrSearchRepository btrSearchRepository;
-    
-    @Inject
-    private AuthorityRepository authorityRepository;
-   // @Inject
-   // private Historybtr historybtr;
-    
-   // @Inject
-   // private com.btapp.repository.HistorybtrRepository historybtrRepository;
-    
-    /**
-     * Save a btr.
-     * @return the persisted entity
-     */
+	private final Logger log = LoggerFactory.getLogger(BtrService.class);
+
+	@Inject
+	private UserRepository userRepository;
+
+	@Inject
+	private BtrRepository btrRepository;
+
+	@Inject
+	private BtrSearchRepository btrSearchRepository;
+
+	@Inject
+	private AuthorityRepository authorityRepository;
+	
+	 @Inject
+	 private UserService userService;
+
+	// @Inject
+	// private com.btapp.repository.HistorybtrRepository historybtrRepository;
+
+	/**
+	 * Save a btr.
+	 * 
+	 * @return the persisted entity
+	 */
 	public Btr save(Btr btr) {
 		log.debug("Request to save Btr : {}", btr);
 
 		btr.getUser();
 		Optional<User> user = userRepository.findOneByLogin(User.getCurrentUser());
+		
 
-		if (btr.getStatus() == null) {
-			btr.setStatus("Initiated");
-		} else if (btr.getStatus().equals("Initiated")) {
-			btr.setStatus("Waiting for approval");
-		} else if (btr.getStatus().equals("Waiting for approval"))
-			btr.setAssigned_to(btr.getManager());
+		// if (btr.getStatus() == null) {
+		// btr.setStatus("Initiated");
+		// } //else if (btr.getStatus().equals("Initiated")) {
+		// btr.setStatus("Waiting for approval");
+		// }
+		// else if (btr.getStatus().equals("Waiting for approval"))
+		// btr.setAssigned_to(btr.getManager());
 
-		if (btr.getId() == null) {
+		if (btr.getId() == null) {// new -> save
 			btr.setAssigned_from((User) user.get());
 			// btr.setAssigned_to(btr.getAssigned_to());
 			btr.setSupplier(btr.getAssigned_to()); // ma intereseaza supplier-ul
@@ -76,14 +80,36 @@ public class BtrService {
 													// btr
 			btr.setManager((User) user.get());
 			btr.setRequest_date(ZonedDateTime.now());
-			btr.setLast_modified_date(ZonedDateTime.now()); // modificat
-															// 25.03.2016
-			btr.setSuma_totala(null);
+			btr.setLast_modified_date(ZonedDateTime.now());
 
+			btr.setSuma_totala(null);
+			btr.setStatus("Initiated"); // a
 		} else {
-			btr.setAssigned_from((User) user.get());
-			btr.setLast_modified_date(ZonedDateTime.now()); // modificat
-															// 25.03.2016
+			if (btr.getStatus().equals("Initiated")) { // a
+				btr.setAssigned_from((User) user.get());
+				btr.setSupplier(btr.getAssigned_to()); // a
+				btr.setLast_modified_date(ZonedDateTime.now());
+			} else if (btr.getStatus().equals("Waiting for approval") && btr.getAssigned_to().getId().equals(btr.getSupplier().getId())) {
+				
+				btr.setAssigned_from((User) user.get());
+				btr.setAssigned_to(btr.getManager());
+				btr.setLast_modified_date(ZonedDateTime.now());
+			} else if (btr.getStatus().equals("Waiting for approval") && btr.getAssigned_to().getId().equals(btr.getManager().getId())) {
+				btr.setAssigned_from((User) user.get());
+				if (btr.getManager().getIdManager() == null){
+				    btr.setAssigned_from((User) user.get());
+				    btr.setAssigned_to(btr.getSupplier());
+				}
+				else {
+					btr.setAssigned_from((User) user.get());
+					Optional<User> managerNDoi = userService.getUserWithAuthoritiesByLogin(btr.getManager().getIdManager());
+					btr.setAssigned_to((User) managerNDoi.get());
+				}	
+			}
+			else {
+				btr.setAssigned_from((User) user.get());
+				btr.setLast_modified_date(ZonedDateTime.now());
+			}
 		}
 
 		// history line added
@@ -107,75 +133,74 @@ public class BtrService {
 
 	}
 
+	/**
+	 * OLD get all the btrs.
+	 * 
+	 * @return the list of entities
+	 * 
+	 * @Transactional(readOnly = true) public Page<Btr> findAll(Pageable
+	 *                         pageable) { log.debug("Request to get all Btrs");
+	 *                         Page<Btr> result =
+	 *                         btrRepository.findAll(pageable); return result; }
+	 */
 
-	/** OLD
-     *  get all the btrs.
-     *  @return the list of entities
-    
-    @Transactional(readOnly = true) 
-    public Page<Btr> findAll(Pageable pageable) {
-        log.debug("Request to get all Btrs");
-        Page<Btr> result = btrRepository.findAll(pageable); 
-        return result;
-    }
-     */
-    
-    /** NEW
-     *  get all the btrs.
-     *  @return the list of entities
-    */
-    @Transactional(readOnly = true) 
-    public Page<Btr> findAll(Pageable pageable) {
-        log.debug("Request to get all Btrs");
-        Page<Btr> result = btrRepository.finByAssigned_toOrEmployeeIsCurrentUser(pageable); 
-        return result;
-    }
-    
-    /** NEW
-     *  get all the btrs in status "Initiated".
-     *  @return the list of entities
-    */
-    @Transactional(readOnly = true) 
-    public Page<Btr> findAllBtrInitiated(Pageable pageable) {
-        log.debug("Request to get all Btrs");
-        Page<Btr> result = btrRepository.findAllBtrInitiated(pageable); 
-        return result;
-    }
+	/**
+	 * NEW get all the btrs.
+	 * 
+	 * @return the list of entities
+	 */
+	@Transactional(readOnly = true)
+	public Page<Btr> findAll(Pageable pageable) {
+		log.debug("Request to get all Btrs");
+		Page<Btr> result = btrRepository.finByAssigned_toOrEmployeeIsCurrentUser(pageable);
+		return result;
+	}
 
-    /**
-     *  get one btr by id.
-     *  @return the entity
-     */
-    @Transactional(readOnly = true) 
-    public Btr findOne(Long id) {
-        log.debug("Request to get Btr : {}", id);
-        Btr btr = btrRepository.findOne(id);
-        btr.getExpenses().size();
-        return btr;
-    }
+	/**
+	 * NEW get all the btrs in status "Initiated".
+	 * 
+	 * @return the list of entities
+	 */
+	@Transactional(readOnly = true)
+	public Page<Btr> findAllBtrInitiated(Pageable pageable) {
+		log.debug("Request to get all Btrs");
+		Page<Btr> result = btrRepository.findAllBtrInitiated(pageable);
+		return result;
+	}
 
-    /**
-     *  delete the  btr by id.
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete Btr : {}", id);
-        btrRepository.delete(id);
-        btrSearchRepository.delete(id);
-    }
+	/**
+	 * get one btr by id.
+	 * 
+	 * @return the entity
+	 */
+	@Transactional(readOnly = true)
+	public Btr findOne(Long id) {
+		log.debug("Request to get Btr : {}", id);
+		Btr btr = btrRepository.findOne(id);
+		btr.getExpenses().size();
+		return btr;
+	}
 
-    /**
-     * search for the btr corresponding
-     * to the query.
-     */
-    @Transactional(readOnly = true) 
-    public List<Btr> search(String query) {
-        
-        log.debug("REST request to search Btrs for query {}", query);    
-        return (List<Btr>) StreamSupport
-            .stream(btrSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
-        
-    }
-    
-    
+	/**
+	 * delete the btr by id.
+	 */
+	public void delete(Long id) {
+		log.debug("Request to delete Btr : {}", id);
+		btrRepository.delete(id);
+		btrSearchRepository.delete(id);
+	}
+
+	/**
+	 * search for the btr corresponding to the query.
+	 */
+	@Transactional(readOnly = true)
+	public List<Btr> search(String query) {
+
+		log.debug("REST request to search Btrs for query {}", query);
+		return (List<Btr>) StreamSupport
+				.stream(btrSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+				.collect(Collectors.toList());
+
+	}
+
 }

@@ -31,13 +31,16 @@ angular.module('btravelappApp')
         	});
         };
         $scope.loadAll();
-        $scope.refresh = function () {
-            $scope.loadAll();
-            $scope.clear();
-        };
-
+        
         ExpenseBtr.getAllExpensesByBtrId($scope.btr.id).then(function(response){
         	$scope.expensesbybtr = response;
         });
+        
+        $scope.refresh = function () {
+            $scope.loadAll();
+            $scope.getAllExpensesByBtrId();
+            $scope.clear();
+        };
+
     });
 

@@ -52,8 +52,8 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="btrs.length!=0 ">
                 	<p ng-hide="btrs.length!=0" translate="btravelappApp.btr.home.norow"></p>
-						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1"><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
-						<!--  
+					 	<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
+						<!-- 
 						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 && btrs.length<5 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
 						<div class="alert alert-info" role="alert" ng-show="btrs.length>=5 && btrs.length<10 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
 						<div class="alert alert-warning" role="alert" ng-show="btrs.length>=10 && btrs.length<20 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
@@ -83,7 +83,7 @@
                     -->
                     
                     <!-- added suma_totala field -->
-                    <th jh-sort-by="suma_totala"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="suma_totala" style="width: 10%"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
                     
                     <th><span><center>Business Travel Request Management</center></span></th>
                     <th has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'"><span><center>Business Travel Request Approval</center></span></th>
@@ -155,9 +155,11 @@
                     </td>                   
                     -->
                     <td>
+                    <div>
                     <span class="form-control-static" ng-show="btr.suma_totala == null">0<span class="glyphicon glyphicon-euro input-sm"></span></span>
                     {{btr.suma_totala}}
                     <span class="glyphicon glyphicon-euro input-sm" ng-show="btr.suma_totala!=null"></span></td>
+                    </div>
                     <td class="text-right"> 
                         <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
                             <button type="submit"

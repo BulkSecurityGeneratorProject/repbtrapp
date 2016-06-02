@@ -123,6 +123,7 @@
     
     
 	<h2 ng-show="expensesbybtr.length!=0" translate="global.field.newcost"></h2>
+	<div class="alert alert-success" role="alert" ng-show="expensesbybtr.length>=1 "><p><span class="badge">{{expensesbybtr.length}}</span>&nbsp;<span translate="global.field.newcost"></span> </p></div>
 	<div class="table-responsive">
 		<table class="jh-table table table-striped">
 			<thead>
@@ -142,10 +143,7 @@
 			</thead>
 			<tbody>
 
-				<h2>
-					<span>Btr</span>
-				</h2>
-				<!--  <tr ng-repeat="expense in expenses track by expense.btr.id"> -->
+
 				<tr ng-repeat="expense in expensesbybtr">
 					<td><a ui-sref="expense.detail({id:expense.id})">{{expense.id}}</a>
 					</td>

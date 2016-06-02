@@ -21,24 +21,23 @@ angular.module('btravelappApp').controller('BtrApproveController',
 
 			$scope.confirmApprove = function(id) {
 
-					$http({
-						method : 'GET',
-						url : '/api/users/' + $scope.btr.assigned_to.idManager
-					}).then(function successCallback(response) {
-						$scope.isSaving = true;
+				$http({
+					method : 'GET',
+					url : '/api/users/' + $scope.btr.assigned_to.idManager
+				}).then(function successCallback(response) {
+					$scope.isSaving = true;
+					$scope.btr.assigned_from = $scope.btr.manager;
+					$scope.btr.assigned_to = response.data;
 
-							$scope.btr.assigned_from = $scope.btr.manager;
-							$scope.btr.assigned_to = response.data;
+					Btr.update($scope.btr, onSaveSuccess, onSaveError);
+				}, function errorCallback(response) {
 
-						Btr.update($scope.btr, onSaveSuccess, onSaveError);
-					}, function errorCallback(response) {
-						
-							$scope.btr.status = "Issuing ticket";
-							$scope.btr.assigned_from = $scope.btr.manager;
-							$scope.btr.assigned_to = $scope.btr.supplier;
-							
-						Btr.update($scope.btr, onSaveSuccess, onSaveError);
-					});
+					$scope.btr.status = "Issuing ticket";
+					$scope.btr.assigned_from = $scope.btr.manager;
+					$scope.btr.assigned_to = $scope.btr.supplier;
+
+					Btr.update($scope.btr, onSaveSuccess, onSaveError);
+				});
 
 			};
 

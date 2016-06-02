@@ -15,7 +15,7 @@
 	    <div class="form-group statusfit" has-authority="ROLE_SUPPLIER">
             <label class="control-label statusfit" translate="btravelappApp.btr.status" for="field_status">Status</label>
          <!--    <span><b translate="btravelappApp.btr.star"></b></span> -->
-            <select class="form-control statusfit" id="field_status" name="status" ng-model="btr.status" >               
+            <select class="form-control statusfit" id="field_status" name="status" ng-model="btr.status">               
                 <option value="Waiting for approval">Waiting for approval</option>
                 <option value="Initiated">Initiated</option>
             </select>
@@ -146,7 +146,7 @@
         <div class="form-group test" has-authority="ROLE_MANAGER">
             <label translate="btravelappApp.btr.user" for="field_user">user</label>
             <span><b translate="btravelappApp.btr.star"></b></span>
-            <select class="form-control" id="field_user" ng-model="btr.user" ng-options="employee.login for employee in employees">
+            <select class="form-control" id="field_user" ng-model="btr.user" ng-options="employee.login for employee in employees">           
                 <option value=""></option>
             </select>
         </div>
