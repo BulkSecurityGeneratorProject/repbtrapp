@@ -1,29 +1,26 @@
 package com.btapp.service;
 
-import com.btapp.domain.Btr;
-import com.btapp.domain.Expense;
-import com.btapp.domain.User;
-import com.btapp.repository.BtrRepository;
-import com.btapp.repository.ExpenseRepository;
-import com.btapp.repository.search.BtrSearchRepository;
-import com.btapp.repository.search.ExpenseSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
-import akka.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.btapp.domain.Btr;
+import com.btapp.domain.Expense;
+import com.btapp.repository.BtrRepository;
+import com.btapp.repository.ExpenseRepository;
+import com.btapp.repository.search.BtrSearchRepository;
+import com.btapp.repository.search.ExpenseSearchRepository;
 
 /**
  * Service Implementation for managing Expense.
