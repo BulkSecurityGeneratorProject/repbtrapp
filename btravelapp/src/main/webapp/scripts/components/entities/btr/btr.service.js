@@ -27,6 +27,13 @@ angular.module('btravelappApp')
     	    return $http.get('api/btrs/initiated').then(function(response) {
     	        return response.data;
     	    });
+    	 },
+		
+		// btrs for admin
+    	getAllBtrsForAdmin : function(){
+    	    return $http.get('api/btrs/admins').then(function(response) {
+    	        return response.data;
+    	    });
     	 }
 		};
 	})

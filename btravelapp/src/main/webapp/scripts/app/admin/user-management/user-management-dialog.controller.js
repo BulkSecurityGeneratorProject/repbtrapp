@@ -13,7 +13,11 @@ angular.module('btravelappApp').controller('UserManagementDialogController',
         // managers login
         Auth.getAllManagers().then(function(response){
             $scope.managers = response;
+            for(var i = 0;i<$scope.managers.length;i++) {
+            	$scope.managers[i] = response[i].login;  
+            }
         });
+       
         
         $scope.managers = User.query();
         

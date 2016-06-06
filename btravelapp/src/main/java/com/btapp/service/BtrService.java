@@ -49,8 +49,6 @@ public class BtrService {
 	 @Inject
 	 private UserService userService;
 
-	// @Inject
-	// private com.btapp.repository.HistorybtrRepository historybtrRepository;
 
 	/**
 	 * Save a btr.
@@ -62,19 +60,10 @@ public class BtrService {
 
 		btr.getUser();
 		Optional<User> user = userRepository.findOneByLogin(User.getCurrentUser());
-		
-
-		// if (btr.getStatus() == null) {
-		// btr.setStatus("Initiated");
-		// } //else if (btr.getStatus().equals("Initiated")) {
-		// btr.setStatus("Waiting for approval");
-		// }
-		// else if (btr.getStatus().equals("Waiting for approval"))
-		// btr.setAssigned_to(btr.getManager());
 
 		if (btr.getId() == null) {// new -> save
 			btr.setAssigned_from((User) user.get());
-			// btr.setAssigned_to(btr.getAssigned_to());
+
 			btr.setSupplier(btr.getAssigned_to()); // ma intereseaza supplier-ul
 													// curent care se ocupa de
 													// btr
@@ -111,21 +100,6 @@ public class BtrService {
 				btr.setLast_modified_date(ZonedDateTime.now());
 			}
 		}
-
-		// history line added
-		// historybtr.setAssigned_from(btr.getAssigned_from().getLogin());
-		// historybtr.setAssigned_to(btr.getAssigned_to().getLogin());
-		// historybtr.setBtr(btr);
-		// historybtr.setCenter_cost(btr.getCenter_cost());
-		// historybtr.setChange_date(btr.getLast_modified_date());
-		// historybtr.setChanged_by(btr.getAssigned_from().getLogin());
-		// historybtr.setEnd_date(btr.getEnd_date());
-		// historybtr.setLast_modified_date(btr.getLast_modified_date());
-		// historybtr.setLocation(btr.getLocation());
-		// historybtr.setRequest_date(btr.getRequest_date());
-		// historybtr.setStart_date(btr.getStart_date());
-		//
-		// historybtrRepository.save(historybtr);
 
 		Btr result = btrRepository.save(btr);
 		btrSearchRepository.save(result);
@@ -167,7 +141,17 @@ public class BtrService {
 		Page<Btr> result = btrRepository.findAllBtrInitiated(pageable);
 		return result;
 	}
-
+	
+	/*
+	 * get all btrs for admin
+	 */
+	@Transactional(readOnly = true)
+	public Page<Btr> findAllBtrAdmin(Pageable pageable) {
+		log.debug("Request to get all Btrs");
+		Page<Btr> result = btrRepository.findAllBtrAdmin(pageable);
+		return result;
+	}
+	
 	/**
 	 * get one btr by id.
 	 * 

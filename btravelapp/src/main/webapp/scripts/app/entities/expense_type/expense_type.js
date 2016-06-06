@@ -8,7 +8,7 @@ angular.module('btravelappApp')
                 url: '/expense_types',
                 data: {
                     //authorities: ['ROLE_USER'],
-                	authorities: ['ROLE_SUPPLIER'],
+                	authorities: ['ROLE_SUPPLIER'] ['ROLE_ADMIN'],
                     pageTitle: 'btravelappApp.expense_type.home.title'
                 },
                 views: {
@@ -30,7 +30,7 @@ angular.module('btravelappApp')
                 url: '/expense_type/{id}',
                 data: {
                     //authorities: ['ROLE_USER'],
-                	authorities: ['ROLE_SUPPLIER'],
+                	authorities: ['ROLE_SUPPLIER'] ['ROLE_ADMIN'],
                     pageTitle: 'btravelappApp.expense_type.detail.title'
                 },
                 views: {

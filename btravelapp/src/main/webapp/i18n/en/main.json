@@ -1,9 +1,9 @@
 {
     "main": {
-        "title": "Welcome to our BTR application!",
+        "title": "Welcome to our Business Travel Request application!",
         "subtitle": "We grow together.",
         "logged": {
-            "message": "You are logged in as user \"{{username}}\"."
+            "message": "Hello \"{{username}}\"."
         },
         "question": "If you have any question on JHipster:",
         "link": {

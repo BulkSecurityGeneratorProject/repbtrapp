@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('btravelappApp')
-    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense, User, Principal) {
+    .controller('BtrController', function ($scope, $state, Btr, BtrSearch, ParseLinks, Expense, User, Principal, BtrInitiated) {
 
     	//added expense
     	$scope.expenses = [];
@@ -17,6 +17,12 @@ angular.module('btravelappApp')
             $scope.isAuthenticated = Principal.isAuthenticated;
         });
         	
+        // btrs for admin
+        $scope.adminbtr = Btr.query();
+        
+        BtrInitiated.getAllBtrsForAdmin().then(function(response){
+            $scope.adminbtrs = response;
+        });
 
         $scope.loadAll = function() {
             Btr.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {

@@ -3,7 +3,7 @@
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left" has-authority="ROLE_MANAGER">
+            <div class="col-xs-4 no-padding-left" has-any-authority="ROLE_MANAGER,ROLE_ADMIN">
                 <button class="btn btn-primary" ui-sref="btr.new">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs"   
@@ -23,25 +23,6 @@
                         </span>
                         
                     </div>
-                    <!--  INCERCARE MULTI-SELECT PENTRU STATUS 				05.042016 
-                    <div class="input-group pull-right" >
-                    	<label class="control-label" translate="btravelappApp.btr.status" for="field_status">Status</label>
-                    	<script type="text/javascript" src="angularjs-dropdown-multiselect.js"></script>
-            				<select class="form-control" id="searchQuery" name="status" ng-model="searchQuery" 
-            						placeholder="{{ 'btravelappApp.btr.home.search' | translate }}">
-                				<option value="Initiated">Initiated</option>
-                				<option value="Waiting for approval">Waiting for approval</option>
-                				<option value="Issuing tickets">Issuing tickets</option>
-                				<option value="Finished">Finished</option>
-                				<option value="Closed">Closed</option>
-            				</select>
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="search()">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                    -->
                 </form>
             </div>
         </div>
@@ -51,14 +32,9 @@
         <table class="jh-table table table-striped" >
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="btrs.length!=0 ">
-                	<p ng-hide="btrs.length!=0" translate="btravelappApp.btr.home.norow"></p>
+                <!--	<p ng-hide="btrs.length!=0" translate="btravelappApp.btr.home.norow"></p>
 					 	<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
-						<!-- 
-						<div class="alert alert-success" role="alert" ng-show="btrs.length>=1 && btrs.length<5 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
-						<div class="alert alert-info" role="alert" ng-show="btrs.length>=5 && btrs.length<10 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
-						<div class="alert alert-warning" role="alert" ng-show="btrs.length>=10 && btrs.length<20 "><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
-						<div class="alert alert-danger" role="alert" ng-show="btrs.length>=20"><p><span translate="btravelappApp.btr.home.norequest"></span> <span class="badge">{{btrs.length}}</span></p></div>
-                    	-->
+						 -->
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span translate="btravelappApp.btr.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                      
@@ -228,103 +204,149 @@
                         		<span translate="entity.action.reject">Reject</span>
                         	</button>
                         </div>
-                    </td>        
-       
-      <!--  attachment added upload --> 
-                    <td has-authority="ROLE_SUPPLIER" ng-show="btr.status=='Issuing ticket'">
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
-    <script src="https://da189i1jfloii.cloudfront.net/js/kinvey-angular-1.1.4.min.js"></script>
-</head>
+                    </td>                                         
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager>
+		
+	
+</div>
 
+<!--  the admin part -->
+<div has-authority="ROLE_ADMIN" >
+		<p>All the Business Travel Request in the application</p>
 
-<body ng-app="kinveyUploadApp" ng-controller="MainCtrl as main">
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped" >
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()" ng-show="adminbtrs.length!=0 ">
 
-<input type="file" id="files" name="files[]"/>
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span translate="btravelappApp.btr.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                     
+                    <th jh-sort-by="start_date"><span translate="btravelappApp.btr.start_date">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="end_date"><span translate="btravelappApp.btr.end_date">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="request_date"><span translate="btravelappApp.btr.request_date">Request_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span translate="btravelappApp.btr.user">user</span> <span class="glyphicon glyphicon-sort"></span></th>
 
-<p ng-if="main.fileModel">
-    File Size: {{main.fileModel.size}} Last Modified: {{main.fileModel['_kmd'].lmt | date:'yyyy-MM-dd HH:mm:ss Z'}}
-</p>
+                    <th jh-sort-by="suma_totala" style="width: 10%"><span translate="btravelappApp.btr.suma_totala">Suma Totala</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    
+                    <th><span><center>Business Travel Request Management</center></span></th>
+                    <th has-authority="ROLE_MANAGER" ng-show="adminbtr.status=='Waiting for approval'"><span><center>Business Travel Request Approval</center></span></th>
+                    <th has-authority="ROLE_SUPPLIER" ng-show="adminbtr.status=='Issuing ticket'"><span><center>Attachment</center></span></th>              
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="btr in adminbtrs track by btr.id">  
 
-<script>
-    angular.module('kinveyUploadApp', ['kinvey'])
-            .run(['$kinvey', function ($kinvey) {
-                // Kinvey initialization starts
-                var promise = $kinvey.init({
-                    appKey: '',
-                    appSecret: ''
-                });
-                promise.then(function () {
-                    // Kinvey initialization finished with success
-                    console.log("Kinvey init with success");
+                    <td><a ui-sref="btr.detail({id:btr.id})">{{btr.id}}</a></td>
+                    <td ng-model="status"><b>{{btr.status}}</b></td>
+                     
+                    <td>{{btr.start_date | date:'mediumDate'}}</td>
+                    <td>{{btr.end_date | date:'mediumDate'}}</td> 
 
-                    var user = $kinvey.getActiveUser();
-                    if (null === user) {
-                        return  $kinvey.User.login({
-                            username: 'test',
-                            password: 'test'
-                        });
-                    } else {
-                        return user;
-                    }
-                }).then(function (_user) {
-                    console.log("Kinvey got user " + JSON.stringify(_user));
-                }, function (errorCallback) {
-                    // Kinvey initialization finished with error
-                    console.log("Kinvey init with error: " + JSON.stringify(errorCallback));
-                });
-            }])
-
-            .controller('MainCtrl', [ '$kinvey', function ($kinvey) {
-                var that = this;
-                this.fileModel = {};
-                this.teststring = 'test string value';
-
-                angular.element(document).find('input')[0].addEventListener('change', function (e) {
-                    var theFile = e.target.files[0];
-
-                    // save the file object
-
-                    var promise = $kinvey.File.upload(theFile, {
-                        _filename: theFile.name,
-                        public: true,
-                        size: theFile.size,
-                        mimeType: theFile.type
-                    }).then(function (_fileData) {
-                        debugger;
-                        console.log("[$upload] success: " + JSON.stringify(_fileData, null, 2));
-                        // now save the file parent, and create the relationship
-                        // using the file _id
-                        var fileParent = {
-                            title: new Date() + " Saved Parent",
-                            fileObject: {
-                                _type: 'KinveyFile',
-                                _id: _fileData._id
-                            }
-                        };
-
-                        that.fileModel = _fileData;
-
-                        return $kinvey.DataStore.save('FileParent', fileParent);
-
-                    }).then(function (_data) {
-                        console.log("[fileObject] success: " + JSON.stringify(_data, null, 2));
-                    }, function error(err) {
-                        console.log('[$upload] received error: ' + JSON.stringify(err, null, 2));
-                    });
-                }, false);
-            }]);
-    </script>
-    </td>               
+                    <td>{{btr.request_date | date:'mediumDate'}}</td>
+                      
+                    <td>
+                        {{btr.user.login}}
+                    </td>
+                    <td>
+                    <div>
+                    <span class="form-control-static" ng-show="btr.suma_totala == null">0<span class="glyphicon glyphicon-euro input-sm"></span></span>
+                    {{btr.suma_totala}}
+                    <span class="glyphicon glyphicon-euro input-sm" ng-show="btr.suma_totala!=null"></span></td>
+                    </div>
+                    <td class="text-right"> 
+                        <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
+                            <button type="submit"
+                                    ui-sref="btr.detail({id:btr.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="btr.edit({id:btr.id})"
+                                    class="btn btn-primary btn-sm"
+                                    has-any-authority="ROLE_MANAGER, ROLE_SUPPLIER"
+                                    ng-show="btr.status=='Initiated'">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <!-- buton de finalizare proces -->
+                            <button type="submit"
+                                    ui-sref="btr.finish({id:btr.id})"
+                                    class="btn btn-success btn-sm"
+                                    has-any-authority="ROLE_SUPPLIER"
+                                    ng-show="btr.status=='Issuing ticket'">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.finish"></span>
+                            </button>
+                            <!--  buton de anulare  "  -->
+                            <button type="submit"   
+                            		ui-sref="btr.close({id:btr.id})" 
+                                    class="btn btn-warning"                                                             
+                                    has-authority="ROLE_MANAGER"
+                                    ng-show="btr.status!='Finished'">                                    
+                                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;
+                                <span class="hidden-xs hidden-sm" translate="entity.action.close"></span>
+                            </button>
+                            
+                            <!--  buton de schimbare expense-uri btr -->
+                            <button type="submit" 
+                        			ui-sref="btr.change({id:btr.id})"
+                        			class="btn btn-warning" 
+                        			has-any-authority="ROLE_SUPPLIER"
+                        			ng-show="btr.status=='Issuing ticket'"> 
+                        		<span class="glyphicon glyphicon-edit"></span><span translate="entity.action.change">Change</span>
+                        	</button>
+                            
+                            
+                            <button type="submit"
+                                    ui-sref="btr.delete({id:btr.id})"
+                                    class="btn btn-danger btn-sm"
+                                    has-authority="ROLE_ADMIN">                                    
+                                <span class="glyphicon glyphicon-minus"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td> 
+                    <td class="text-right" has-authority="ROLE_MANAGER" ng-show="btr.status=='Waiting for approval'" ng-hide="btr.assigned_to.login!=account.login">
+                        <div class="btn-group flex-btn-group-container" ng-controller="BtrController">
+                        <!--  ng-disabled="isDisabled" ng-click="disableButton()"   il pusesem sa dispara butonu dupa apasare-->
+                        	<button type="submit" 
+                        			ui-sref="btr.approve({id:btr.id})"
+                        			class="btn btn-success btn-sm"> 
+                        		<span translate="entity.action.approve">Approve</span>
+                        	</button>
+                        	<button type="submit" 
+                        			ui-sref="btr.reject({id:btr.id})"
+                        			class="btn btn-danger btn-sm" > 
+                        		<span translate="entity.action.reject">Reject</span>
+                        	</button>
+                        </div>
+                    </td>                                         
                 </tr>
             </tbody>
         </table>
     </div>
       <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager> 
 		
+	
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

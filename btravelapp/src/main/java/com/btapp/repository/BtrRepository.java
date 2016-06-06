@@ -40,5 +40,8 @@ public interface BtrRepository extends JpaRepository<Btr,Long> {
 
     @Query("select btr from Btr btr where btr.status = 'Initiated' and btr.supplier.login = ?#{principal.username} ")
     Page<Btr> findAllBtrInitiated(Pageable pageable);
+    
+    @Query("select btr from Btr btr")
+    Page<Btr> findAllBtrAdmin(Pageable pageable);
 
 }

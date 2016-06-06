@@ -11,11 +11,15 @@ import org.springframework.data.jpa.repository.Query;
 /**
  * Spring Data ElasticSearch repository for the Btr entity.
  */
-public interface BtrSearchRepository extends MyElasticsearchRepository {
-//ElasticsearchRepository{
+
+public interface BtrSearchRepository extends ElasticsearchRepository<Btr, Long> {
+}
+/*
+public interface BtrSearchRepository extends //MyElasticsearchRepository {
+ElasticsearchRepository{
     //Page<Btr> mySearch(Pageable pageable);
 
-	//Page<Btr> search(QueryStringQueryBuilder queryStringQuery);
+	Page<Btr> search(QueryStringQueryBuilder queryStringQuery);
 	
 }
-
+*/

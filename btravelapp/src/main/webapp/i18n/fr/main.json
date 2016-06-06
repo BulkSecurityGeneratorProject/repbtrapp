@@ -1,9 +1,9 @@
 {
     "main": {
-        "title": "Bienvenue à notre demande de BTR !",
+        "title": "Bienvenue sur notre Voyage d'affaires Demande l'application!",
         "subtitle": "Nous grandissons ensemble.",
         "logged": {
-            "message": "Vous êtes connecté en tant que \"{{username}}\"."
+            "message": "Bonjour \"{{username}}\"."
         },
         "question": "Si vous avez des questions à propos de JHipster:",
         "link": {
